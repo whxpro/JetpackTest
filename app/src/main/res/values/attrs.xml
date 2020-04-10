@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CycleViewPager2">
+        <attr name="canAutoTurning" format="boolean"/>
+        <attr name="turningTime" format="integer"/>
+    </declare-styleable>
+</resources>

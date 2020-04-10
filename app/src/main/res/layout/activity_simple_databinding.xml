@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.whx.jetpacktest.databinding.User" />
+
+        <variable
+            name="userInfo"
+            type="User" />
+        <!--        <import type="com.whx.jetpacktest.mvvm.Goods"/>-->
+        <!--        <variable-->
+        <!--            name="goods"-->
+        <!--            type="Goods" />-->
+        <import type="android.text.TextUtils" />
+        <import type="android.view.View"/>
+
+        <import type="com.whx.jetpacktest.databinding.ObservableGoods" />
+
+        <variable
+            name="observableGoods"
+            type="ObservableGoods" />
+
+        <import type="androidx.databinding.ObservableList" />
+
+        <import type="androidx.databinding.ObservableMap" />
+
+        <variable
+            name="list"
+            type="ObservableList&lt;String&gt;" />
+
+        <variable
+            name="map"
+            type="ObservableMap&lt;String,String&gt;" />
+
+        <variable
+            name="index"
+            type="int" />
+
+        <variable
+            name="key"
+            type="String" />
+
+        <variable
+            name="eventHanlder"
+            type="com.whx.jetpacktest.databinding.SimpleDatabindingActivity.EventHandler" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="paddingBig"
+            type="boolean" />
+
+        <variable
+            name="nullableStr"
+            type="String" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{list[index], default=hhh}" />
+
+            <TextView
+                android:id="@+id/tv_userPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background='@{"red"}'
+                android:text="@{map[key], default=whatthefuck}" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background='@{"green"}'
+                android:text="@{String.valueOf(observableGoods.price), default=1.23}"
+                android:visibility="@{TextUtils.isEmpty(observableGoods.name) ? View.GONE : View.VISIBLE}" />
+
+            <Button
+                android:id="@+id/change_name_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="@{()->eventHanlder.changeName()}"
+                android:text="change name and price" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:onClick="@{()->eventHanlder.changeDetail()}"
+                android:text="change detail and price" />
+
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{observableGoods.name}" />
+
+            <EditText
+                android:id="@+id/input_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:afterTextChanged="@{eventHanlder.afterTextChange}"
+                android:text="@={observableGoods.name}" />
+
+            <include
+                layout="@layout/view_include"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                bind:userInfo="@{userInfo}" />
+
+            <ViewStub
+                android:id="@+id/view_stub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout="@layout/view_include"
+                bind:userInfo="@{userInfo}"/>
+
+            <Button
+                android:id="@+id/show_viewStub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{()->eventHanlder.showViewStub()}"
+                android:text="show viewstub"/>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="10dp"
+                android:scaleType="center"
+                imageUrl="@{imageUrl}"/>
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:padding="@{paddingBig ? @dimen/paddingBig : @dimen/paddingSmall}"
+                android:text="@{@string/formatStr(userInfo.name, userInfo.portrait)}"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/marginSmall"
+                android:layout_marginEnd="@dimen/marginSmall"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:text="@={userInfo.name}"
+                android:hint="user name"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/marginSmall"
+                android:layout_marginEnd="@dimen/marginSmall"
+                android:inputType="textPassword"
+                android:text="@={userInfo.passwd}"
+                android:hint="password"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginSmall"
+                android:onClick="@{()->eventHanlder.login()}"
+                android:text='@{"login"}'/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/marginSmall"
+                android:text='@{nullableStr ?? "fuck, its null"}'/>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
