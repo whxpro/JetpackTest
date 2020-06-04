@@ -65,4 +65,12 @@
         android:text="add_shortcut"
         app:layout_constraintTop_toBottomOf="@+id/to_viewpager"/>
 
+    <Button
+        android:id="@+id/send_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/to_viewpager"
+        app:layout_constraintLeft_toRightOf="@+id/to_viewpager"
+        android:text="notification"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

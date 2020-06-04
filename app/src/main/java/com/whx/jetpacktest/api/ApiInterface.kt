@@ -1,4 +1,4 @@
-package com.whx.jetpacktest
+package com.whx.jetpacktest.api
 
 import com.whx.jetpacktest.viewmodel.Data
 import retrofit2.Call

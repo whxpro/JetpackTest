@@ -2,7 +2,7 @@ package com.whx.jetpacktest.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.whx.jetpacktest.ApiInterface
+import com.whx.jetpacktest.api.ApiInterface
 import com.whx.jetpacktest.net.SSLSocketClient
 import okhttp3.OkHttpClient
 import retrofit2.Call

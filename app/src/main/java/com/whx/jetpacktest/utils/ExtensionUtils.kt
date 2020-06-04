@@ -1,4 +1,4 @@
-package com.whx.jetpacktest
+package com.whx.jetpacktest.utils
 
 import android.annotation.SuppressLint
 import android.graphics.Color

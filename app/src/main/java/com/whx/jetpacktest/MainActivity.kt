@@ -16,6 +16,7 @@ import androidx.core.graphics.drawable.IconCompat
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.rx.RxTestActivity
 import com.whx.jetpacktest.tmp.PhotosActivity
+import com.whx.jetpacktest.tmp.RemoteViewTest
 import com.whx.jetpacktest.tmp.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,8 +55,15 @@ class MainActivity : BaseActivity() {
             }, 5000)
             add("hhh", "测试")
         }
+
+        send_notification.setOnClickListener {
+            RemoteViewTest().initNotification(this)
+        }
     }
 
+    override fun onPostResume() {
+        super.onPostResume()
+    }
     override fun onPause() {
         Log.e("-------", "pause")
         super.onPause()
