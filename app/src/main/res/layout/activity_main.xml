@@ -4,17 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/to_mvvm"
         android:layout_width="wrap_content"
@@ -72,5 +63,28 @@
         app:layout_constraintTop_toTopOf="@+id/to_viewpager"
         app:layout_constraintLeft_toRightOf="@+id/to_viewpager"
         android:text="notification"/>
+
+    <com.whx.jetpacktest.widget.shadow.ShadowLayout
+        android:id="@+id/shadowLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_shortcut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        app:isShowShadow="true"
+        app:shadow_radius="5dp"
+        app:shadow_dy="1dp"
+        app:shadowColor="#0DF44336"
+        app:cornerRadius="10dp">
+        <TextView
+            android:id="@+id/to_refresh"
+            android:layout_width="300dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:background="@android:color/white"
+            android:text="hhhhhhhhhhhhhhh"/>
+    </com.whx.jetpacktest.widget.shadow.ShadowLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

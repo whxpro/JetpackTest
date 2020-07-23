@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CycleViewPager2">
-        <attr name="canAutoTurning" format="boolean"/>
-        <attr name="turningTime" format="integer"/>
+        <attr name="canAutoTurning" format="boolean" />
+        <attr name="turningTime" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ShadowLayout">
+        <attr name="isShowShadow" format="boolean" />
+        <attr name="leftShow" format="boolean" />
+        <attr name="rightShow" format="boolean" />
+        <attr name="bottomShow" format="boolean" />
+        <attr name="topShow" format="boolean" />
+        <attr name="cornerRadius" format="dimension" />
+        <attr name="cornerRadius_leftTop" format="dimension" />
+        <attr name="cornerRadius_leftBottom" format="dimension" />
+        <attr name="cornerRadius_rigthTop" format="dimension" />
+        <attr name="cornerRadius_rightBottom" format="dimension" />
+        <attr name="shadow_radius" format="dimension" />
+        <attr name="shadow_dx" format="dimension" />
+        <attr name="shadow_dy" format="dimension" />
+        <attr name="shadowColor" format="color" />
+        <attr name="shadowBackColor" format="color" />
+        <attr name="shadowBackColorClicked" format="color" />
+        <attr name="isSym" format="boolean" />
+        <attr name="selectorMode">
+            <flag name="pressed" value="1" />
+            <flag name="selected" value="2" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="DWRefreshLayout">
+        <attr name="refresh_style">
+            <enum name="style_below" value="1"/>
+            <enum name="style_default" value="2"/>
+            <enum name="style_material" value="3"/>
+        </attr>
+
     </declare-styleable>
 </resources>

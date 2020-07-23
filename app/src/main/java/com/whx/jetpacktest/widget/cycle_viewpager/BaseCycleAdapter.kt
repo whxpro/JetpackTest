@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp.cycle_viewpager
+package com.whx.jetpacktest.widget.cycle_viewpager
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_ID

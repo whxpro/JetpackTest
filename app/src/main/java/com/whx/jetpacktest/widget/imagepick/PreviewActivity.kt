@@ -1,23 +1,11 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget.imagepick
 
-import android.net.Uri
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
-import com.bumptech.glide.load.resource.bitmap.DrawableTransformation
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.request.ImageRequestBuilder
-import com.squareup.picasso.Picasso
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
 import kotlinx.android.synthetic.main.common_image.*
-import kotlinx.android.synthetic.main.layout_drawee.*
-import java.io.File
 
 class PreviewActivity : BaseActivity() {
 

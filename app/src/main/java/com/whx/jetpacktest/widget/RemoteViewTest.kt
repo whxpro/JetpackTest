@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget
 
 import android.app.*
 import android.content.Context
@@ -8,6 +8,7 @@ import android.os.Build
 import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.widget.imagepick.PhotosActivity
 
 class RemoteViewTest {
     fun initNotification(context: Activity) {

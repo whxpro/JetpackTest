@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget
 
 import android.content.Context
 import android.util.AttributeSet

@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp.cycle_viewpager
+package com.whx.jetpacktest.widget.cycle_viewpager
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget.imagepick
 
 import android.provider.MediaStore
 import android.text.TextUtils
@@ -88,12 +88,17 @@ object ImageBucketLoader {
     fun getImageBucketObservable(): Maybe<MutableList<ImageBucket>> {
         return Maybe.create(MaybeOnSubscribe<MutableList<ImageBucket>> {
             try {
-                val bucketMap = getPictureBucket()
+                val bucketMap =
+                    getPictureBucket()
                 val bucketList = mutableListOf<ImageBucket>()
 
                 //Map转List方便后续RecyclerView使用
                 bucketMap.forEach {
-                    val imageBucket = ImageBucket(it.key, it.value)
+                    val imageBucket =
+                        ImageBucket(
+                            it.key,
+                            it.value
+                        )
                     bucketList.add(imageBucket)
                 }
 
@@ -112,7 +117,12 @@ object ImageBucketLoader {
     ): Maybe<MutableList<String>> {
         return Maybe.create {
             try {
-                val allImages = getAllPictures(filterJpgAndPng, selection, selectionArgs)
+                val allImages =
+                    getAllPictures(
+                        filterJpgAndPng,
+                        selection,
+                        selectionArgs
+                    )
                 it.onSuccess(allImages)
                 it.onComplete()
             } catch (e: Exception) {

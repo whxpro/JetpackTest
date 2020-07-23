@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp.cycle_viewpager
+package com.whx.jetpacktest.widget.cycle_viewpager
 
 import android.content.Context
 import android.os.Build
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.viewpager2.widget.ViewPager2
 import com.whx.jetpacktest.R
-import com.whx.jetpacktest.tmp.Indicator
 import java.lang.ref.WeakReference
 import java.util.*
 

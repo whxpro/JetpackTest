@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget.cycle_viewpager
 
 import android.view.View
 

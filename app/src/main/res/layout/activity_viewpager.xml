@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.whx.jetpacktest.tmp.cycle_viewpager.CycleViewPager2
+    <com.whx.jetpacktest.widget.cycle_viewpager.CycleViewPager2
         android:id="@+id/viewpager2"
         android:layout_width="match_parent"
         android:layout_height="250dp"/>

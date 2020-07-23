@@ -38,15 +38,17 @@
 
         <activity android:name=".rx.RxTestActivity" />
 
-        <activity android:name=".tmp.PhotosActivity" />
+        <activity android:name=".widget.imagepick.PhotosActivity" />
 
-        <activity android:name=".tmp.PreviewActivity" />
+        <activity android:name=".widget.imagepick.PreviewActivity" />
 
         <activity android:name=".viewmodel.ViewModelActivity"/>
 
-        <activity android:name=".tmp.cycle_viewpager.ViewpagerActivity"/>
+        <activity android:name=".widget.cycle_viewpager.ViewpagerActivity"/>
 
         <receiver android:name=".MainActivity$CallbackReceiver" android:exported="false"/>
+
+        <activity android:name=".widget.refresh.TestRefreshActivity"/>
     </application>
 
 </manifest>

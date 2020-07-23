@@ -1,4 +1,4 @@
-package com.whx.jetpacktest.tmp
+package com.whx.jetpacktest.widget.imagepick
 
 import android.Manifest
 import android.content.Intent
@@ -14,8 +14,6 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -99,7 +97,9 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.common_image, parent, false)
-        return PhotoViewHolder(view)
+        return PhotoViewHolder(
+            view
+        )
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {

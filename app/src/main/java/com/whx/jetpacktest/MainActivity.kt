@@ -15,9 +15,10 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.rx.RxTestActivity
-import com.whx.jetpacktest.tmp.PhotosActivity
-import com.whx.jetpacktest.tmp.RemoteViewTest
-import com.whx.jetpacktest.tmp.cycle_viewpager.ViewpagerActivity
+import com.whx.jetpacktest.widget.imagepick.PhotosActivity
+import com.whx.jetpacktest.widget.RemoteViewTest
+import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
+import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -58,6 +59,10 @@ class MainActivity : BaseActivity() {
 
         send_notification.setOnClickListener {
             RemoteViewTest().initNotification(this)
+        }
+
+        to_refresh.setOnClickListener {
+            startActivity(Intent(this, TestRefreshActivity::class.java))
         }
     }
 
