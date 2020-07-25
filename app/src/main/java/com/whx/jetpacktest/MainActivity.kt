@@ -14,6 +14,7 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
+import com.whx.jetpacktest.nav.NavHostActivity
 import com.whx.jetpacktest.rx.RxTestActivity
 import com.whx.jetpacktest.widget.imagepick.PhotosActivity
 import com.whx.jetpacktest.widget.RemoteViewTest
@@ -63,6 +64,10 @@ class MainActivity : BaseActivity() {
 
         to_refresh.setOnClickListener {
             startActivity(Intent(this, TestRefreshActivity::class.java))
+        }
+
+        navigation.setOnClickListener {
+            startActivity(Intent(this, NavHostActivity::class.java))
         }
     }
 

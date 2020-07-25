@@ -64,6 +64,14 @@
         app:layout_constraintLeft_toRightOf="@+id/to_viewpager"
         android:text="notification"/>
 
+    <Button
+        android:id="@+id/navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/add_shortcut"
+        app:layout_constraintStart_toEndOf="@+id/add_shortcut"
+        android:text="to_nav"/>
+
     <com.whx.jetpacktest.widget.shadow.ShadowLayout
         android:id="@+id/shadowLayout"
         android:layout_width="wrap_content"

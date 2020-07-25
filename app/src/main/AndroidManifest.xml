@@ -26,6 +26,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,13 +43,17 @@
 
         <activity android:name=".widget.imagepick.PreviewActivity" />
 
-        <activity android:name=".viewmodel.ViewModelActivity"/>
+        <activity android:name=".viewmodel.ViewModelActivity" />
 
-        <activity android:name=".widget.cycle_viewpager.ViewpagerActivity"/>
+        <activity android:name=".widget.cycle_viewpager.ViewpagerActivity" />
 
-        <receiver android:name=".MainActivity$CallbackReceiver" android:exported="false"/>
+        <receiver
+            android:name=".MainActivity$CallbackReceiver"
+            android:exported="false" />
 
-        <activity android:name=".widget.refresh.TestRefreshActivity"/>
+        <activity android:name=".widget.refresh.TestRefreshActivity" />
+
+        <activity android:name=".nav.NavHostActivity" />
     </application>
 
 </manifest>
