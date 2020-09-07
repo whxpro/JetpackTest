@@ -10,5 +10,8 @@ interface ApiInterface {
     interface Image {
         @GET("api/data/%E7%A6%8F%E5%88%A9/10/{page}")
         fun getUrls(@Path("page") page: String): Call<Data>
+
+        @GET("api/data/%E7%A6%8F%E5%88%A9/10/{page}")
+        fun getUrlsA(@Path("page") page: String): Call<Data>
     }
 }

@@ -13,14 +13,17 @@ import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import com.whx.jetpacktest.coroutines.CoroTestActivity
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.nav.NavHostActivity
 import com.whx.jetpacktest.rx.RxTestActivity
+import com.whx.jetpacktest.utils.MarketTool
 import com.whx.jetpacktest.widget.imagepick.PhotosActivity
 import com.whx.jetpacktest.widget.RemoteViewTest
 import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
 import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
+import com.whx.jetpacktest.widget.WidgetTestActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -68,6 +71,18 @@ class MainActivity : BaseActivity() {
 
         navigation.setOnClickListener {
             startActivity(Intent(this, NavHostActivity::class.java))
+        }
+
+        to_coroutine.setOnClickListener {
+            startActivity(Intent(this, CoroTestActivity::class.java))
+        }
+
+        to_widget.setOnClickListener {
+            startActivity(Intent(this, WidgetTestActivity::class.java))
+        }
+
+        to_market.setOnClickListener {
+            MarketTool.startToMarket(this)
         }
     }
 

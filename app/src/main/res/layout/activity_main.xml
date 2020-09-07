@@ -72,11 +72,35 @@
         app:layout_constraintStart_toEndOf="@+id/add_shortcut"
         android:text="to_nav"/>
 
+    <Button
+        android:id="@+id/to_coroutine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/add_shortcut"
+        app:layout_constraintStart_toEndOf="@+id/navigation"
+        android:text="to_coroutine"/>
+
+    <Button
+        android:id="@+id/to_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_shortcut"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="to_widget"/>
+
+    <Button
+        android:id="@+id/to_market"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/add_shortcut"
+        app:layout_constraintStart_toEndOf="@id/to_widget"
+        android:text="to_market"/>
+
     <com.whx.jetpacktest.widget.shadow.ShadowLayout
         android:id="@+id/shadowLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/add_shortcut"
+        app:layout_constraintTop_toBottomOf="@id/to_widget"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="20dp"

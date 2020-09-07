@@ -3,6 +3,7 @@ package com.whx.jetpacktest.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.whx.jetpacktest.api.ApiInterface
+import com.whx.jetpacktest.net.NetworkManager
 import com.whx.jetpacktest.net.SSLSocketClient
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -15,18 +16,8 @@ class Repos {
     companion object {
         fun getUrlData(page: String): MutableLiveData<Data> {
             val tmp = MutableLiveData<Data>()
-            val client = OkHttpClient()
-                .newBuilder()
-                .sslSocketFactory(SSLSocketClient.getSSLSocketFactory())
-                .hostnameVerifier(SSLSocketClient.getHostnameVerifier())
-                .build()
 
-            Retrofit.Builder()
-                .client(client)
-                .baseUrl("https://gank.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(ApiInterface.Image::class.java)
+            NetworkManager.getApiService("https://gank.io/", ApiInterface.Image::class.java)
                 .getUrls(page)
                 .enqueue(object : Callback<Data> {
                     override fun onResponse(call: Call<Data>, response: Response<Data>) {

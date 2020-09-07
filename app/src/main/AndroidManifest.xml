@@ -54,6 +54,10 @@
         <activity android:name=".widget.refresh.TestRefreshActivity" />
 
         <activity android:name=".nav.NavHostActivity" />
+
+        <activity android:name=".coroutines.CoroTestActivity" />
+
+        <activity android:name=".widget.WidgetTestActivity" />
     </application>
 
 </manifest>
