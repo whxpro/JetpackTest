@@ -96,6 +96,14 @@
         app:layout_constraintStart_toEndOf="@id/to_widget"
         android:text="to_market"/>
 
+    <Button
+        android:id="@+id/to_statusbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_shortcut"
+        app:layout_constraintStart_toEndOf="@id/to_market"
+        android:text="to_statusbar"/>
+
     <com.whx.jetpacktest.widget.shadow.ShadowLayout
         android:id="@+id/shadowLayout"
         android:layout_width="wrap_content"
