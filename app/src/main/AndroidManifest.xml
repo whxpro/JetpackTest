@@ -59,12 +59,15 @@
 
         <activity android:name=".widget.WidgetTestActivity" />
 
-        <activity android:name=".widget.statusbar.ActivityBlue"
-            android:theme="@style/Theme.Base.NoBg.HashSwipeTransparent"/>
+        <activity
+            android:name=".widget.statusbar.ActivityBlue"
+            android:theme="@style/Theme.Base.NoBg.HashSwipeTransparent" />
 
         <activity android:name=".widget.statusbar.ActivityWhite" />
 
         <activity android:name=".widget.statusbar.ActivityBlack" />
+
+        <activity android:name=".widget.lottie.LottieTestActivity" />
     </application>
 
 </manifest>

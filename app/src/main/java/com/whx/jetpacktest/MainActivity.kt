@@ -24,6 +24,7 @@ import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
 import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import com.whx.jetpacktest.widget.WidgetTestActivity
+import com.whx.jetpacktest.widget.lottie.LottieTestActivity
 import com.whx.jetpacktest.widget.statusbar.ActivityBlue
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -88,6 +89,10 @@ class MainActivity : BaseActivity() {
 
         to_statusbar.setOnClickListener {
             startActivity(Intent(this, ActivityBlue::class.java))
+        }
+
+        to_lottie.setOnClickListener {
+            startActivity(Intent(this, LottieTestActivity::class.java))
         }
     }
 
