@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/startCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startCalculate" />
+
+    <Button
+        android:id="@+id/cancelCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancelCalculate" />
+
+    <Button
+        android:id="@+id/startTimed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startTimed" />
+
+    <Button
+        android:id="@+id/cancelTimed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancelTimed" />
+
+    <Button
+        android:id="@+id/startProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="startProgress" />
+
+    <Button
+        android:id="@+id/cancelProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cancelProgress" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="startCalculate, cancelCalculate, startTimed, cancelTimed, startProgress, cancelProgress"
+        app:flow_horizontalStyle="spread_inside"
+        app:flow_wrapMode="aligned"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flow_layout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

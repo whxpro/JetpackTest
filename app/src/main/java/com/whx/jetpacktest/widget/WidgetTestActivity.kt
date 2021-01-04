@@ -37,6 +37,11 @@ class WidgetTestActivity : BaseActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        marquee_text.startScroll()
+    }
+
     class MAdapter : RecyclerView.Adapter<MViewHolder>() {
         override fun getItemCount(): Int {
             return 2

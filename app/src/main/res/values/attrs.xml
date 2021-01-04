@@ -45,4 +45,11 @@
             <enum name="both" value="3" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="MarqueeTextView">
+        <attr name="mtv_scroll_time" format="integer" />
+        <attr name="mtv_scroll_interval" format="integer" />
+        <attr name="mtv_scroll_count" format="integer" />
+        <attr name="mtv_auto_scroll" format="boolean" />
+    </declare-styleable>
 </resources>

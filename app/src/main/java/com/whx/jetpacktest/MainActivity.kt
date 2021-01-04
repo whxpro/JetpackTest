@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -26,6 +27,7 @@ import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import com.whx.jetpacktest.widget.WidgetTestActivity
 import com.whx.jetpacktest.widget.lottie.LottieTestActivity
 import com.whx.jetpacktest.widget.statusbar.ActivityBlue
+import com.whx.jetpacktest.workmanager.WorkTestActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -93,6 +95,10 @@ class MainActivity : BaseActivity() {
 
         to_lottie.setOnClickListener {
             startActivity(Intent(this, LottieTestActivity::class.java))
+        }
+
+        toWork.setOnClickListener {
+            startActivity(Intent(this, WorkTestActivity::class.java))
         }
     }
 

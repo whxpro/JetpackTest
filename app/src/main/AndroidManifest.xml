@@ -27,6 +27,12 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!-- 移除WorkManger 默认初始化程序 -->
+        <provider
+            android:authorities="${applicationId}.workmanager-init"
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            tools:node="remove"/>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -68,6 +74,8 @@
         <activity android:name=".widget.statusbar.ActivityBlack" />
 
         <activity android:name=".widget.lottie.LottieTestActivity" />
+
+        <activity android:name=".workmanager.WorkTestActivity" />
     </application>
 
 </manifest>
