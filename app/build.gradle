@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.didi.dokit'
 
+apply plugin: 'com.google.protobuf'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -34,6 +36,25 @@ android {
     // work-runtime-ktx 2.1.0 and above now requires Java 8
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
     }
 }
 
@@ -99,9 +120,21 @@ dependencies {
     implementation "androidx.work:work-runtime:$work_version"
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    // DataStore
+    implementation ("androidx.datastore:datastore-preferences:$datastore_version") {
+
+    }     // preferences
+    implementation ("androidx.datastore:datastore:$datastore_version") {
+
+    }                 // typed
+    // protobuf
+    implementation "com.google.protobuf:protobuf-javalite:3.10.0"
+
     // dokit
     debugImplementation 'com.didichuxing.doraemonkit:dokitx:3.3.4'
     releaseImplementation 'com.didichuxing.doraemonkit:dokitx-no-op:3.3.4'
+
+    implementation 'com.tencent:mmkv:1.2.8'
     
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -67,6 +67,7 @@
 
         <activity
             android:name=".widget.statusbar.ActivityBlue"
+            android:launchMode="singleInstance"
             android:theme="@style/Theme.Base.NoBg.HashSwipeTransparent" />
 
         <activity android:name=".widget.statusbar.ActivityWhite" />
@@ -76,6 +77,8 @@
         <activity android:name=".widget.lottie.LottieTestActivity" />
 
         <activity android:name=".workmanager.WorkTestActivity" />
+
+        <activity android:name=".datastore.DataStoreTestActivity"/>
     </application>
 
 </manifest>

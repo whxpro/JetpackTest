@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+option java_package = "com.whx.jetpacktest.protobuf";
+option java_outer_classname = "BeautyProto";
+
+message Beauty {
+  // 格式：字段类型 + 字段名称 + 字段编号
+  string name = 1;
+}

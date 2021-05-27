@@ -143,4 +143,12 @@
         app:layout_constraintStart_toEndOf="@id/to_lottie"
         android:text="to_work"/>
 
+    <Button
+        android:id="@+id/toDataStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/to_lottie"
+        app:layout_constraintStart_toEndOf="@id/toWork"
+        android:text="to_datastore"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

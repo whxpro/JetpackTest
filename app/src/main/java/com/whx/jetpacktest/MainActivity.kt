@@ -16,6 +16,7 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import com.whx.jetpacktest.coroutines.CoroTestActivity
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
+import com.whx.jetpacktest.datastore.DataStoreTestActivity
 import com.whx.jetpacktest.nav.NavHostActivity
 import com.whx.jetpacktest.rx.RxTestActivity
 import com.whx.jetpacktest.utils.MarketTool
@@ -99,6 +100,10 @@ class MainActivity : BaseActivity() {
 
         toWork.setOnClickListener {
             startActivity(Intent(this, WorkTestActivity::class.java))
+        }
+
+        toDataStore.setOnClickListener {
+            startActivity(Intent(this, DataStoreTestActivity::class.java))
         }
     }
 

@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.work.Configuration
 import com.didichuxing.doraemonkit.DoraemonKit
 import com.facebook.drawee.backends.pipeline.Fresco
+import com.tencent.mmkv.MMKV
 
 class NBApplication : Application(), Configuration.Provider {
 
@@ -16,6 +17,8 @@ class NBApplication : Application(), Configuration.Provider {
 
         DoraemonKit.install(this)
         Fresco.initialize(this)
+
+        MMKV.initialize(this)
     }
 
     companion object {
