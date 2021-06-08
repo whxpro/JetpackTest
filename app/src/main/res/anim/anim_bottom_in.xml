@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <translate xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="500"
-    android:fromYDelta="-100%"
+    android:fromYDelta="100%"
     android:toYDelta="0%">
-
+    <!-- from 和to 都是针对页面的top（顶边），上面的写法就是顶边从屏幕底边（100%）运动到屏幕顶边（0%）-->
 </translate>

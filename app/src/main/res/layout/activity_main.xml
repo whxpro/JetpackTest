@@ -5,150 +5,168 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:ignore="HardcodedText">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="to_mvvm,to_rx,to_photos,to_vm,
+        to_viewpager,add_shortcut,send_notification,navigation,to_coroutine,
+        to_widget,to_market,to_statusbar,to_lottie,toWork,toDataStore,toCoord,toCompose"
+        app:flow_horizontalBias="0"
+        app:flow_horizontalStyle="packed"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/to_mvvm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="databinding"/>
+        android:text="databinding" />
+
     <Button
         android:id="@+id/to_rx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/to_mvvm"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/marginSmall"
-        android:text="to_rx"/>
+        android:text="to_rx" />
 
     <Button
         android:id="@+id/to_photos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/to_rx"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/marginSmall"
-        android:text="to_photos"/>
+        android:text="to_photos" />
 
     <Button
         android:id="@+id/to_vm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/to_mvvm"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:text="to_vm"/>
+        android:text="to_vm" />
 
     <Button
         android:id="@+id/to_viewpager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/to_mvvm"
-        app:layout_constraintLeft_toRightOf="@id/to_vm"
         android:layout_marginStart="@dimen/marginSmall"
-        android:text="to_viewpager"/>
+        android:text="to_viewpager"
+        app:layout_constraintLeft_toRightOf="@id/to_vm"
+        app:layout_constraintTop_toBottomOf="@+id/to_mvvm" />
 
     <Button
         android:id="@+id/add_shortcut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:text="add_shortcut"
-        app:layout_constraintTop_toBottomOf="@+id/to_viewpager"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/to_viewpager" />
 
     <Button
         android:id="@+id/send_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/to_viewpager"
+        android:text="notification"
         app:layout_constraintLeft_toRightOf="@+id/to_viewpager"
-        android:text="notification"/>
+        app:layout_constraintTop_toTopOf="@+id/to_viewpager" />
 
     <Button
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/add_shortcut"
+        android:text="to_nav"
         app:layout_constraintStart_toEndOf="@+id/add_shortcut"
-        android:text="to_nav"/>
+        app:layout_constraintTop_toTopOf="@+id/add_shortcut" />
 
     <Button
         android:id="@+id/to_coroutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/add_shortcut"
+        android:text="to_coroutine"
         app:layout_constraintStart_toEndOf="@+id/navigation"
-        android:text="to_coroutine"/>
+        app:layout_constraintTop_toTopOf="@+id/add_shortcut" />
 
     <Button
         android:id="@+id/to_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/add_shortcut"
+        android:text="to_widget"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="to_widget"/>
+        app:layout_constraintTop_toBottomOf="@+id/add_shortcut" />
 
     <Button
         android:id="@+id/to_market"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/add_shortcut"
+        android:text="to_market"
         app:layout_constraintStart_toEndOf="@id/to_widget"
-        android:text="to_market"/>
+        app:layout_constraintTop_toBottomOf="@+id/add_shortcut" />
 
     <Button
         android:id="@+id/to_statusbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/add_shortcut"
+        android:text="to_statusbar"
         app:layout_constraintStart_toEndOf="@id/to_market"
-        android:text="to_statusbar"/>
+        app:layout_constraintTop_toBottomOf="@id/add_shortcut" />
 
     <Button
         android:id="@+id/to_lottie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/to_widget"
+        android:text="to_lottie"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="to_lottie"/>
+        app:layout_constraintTop_toBottomOf="@id/to_widget" />
 
     <com.whx.jetpacktest.widget.shadow.ShadowLayout
         android:id="@+id/shadowLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/to_lottie"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
+        app:cornerRadius="10dp"
         app:isShowShadow="true"
-        app:shadow_radius="5dp"
-        app:shadow_dy="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/flow"
         app:shadowColor="#0DF44336"
-        app:cornerRadius="10dp">
+        app:shadow_dy="1dp"
+        app:shadow_radius="5dp">
+
         <TextView
             android:id="@+id/to_refresh"
             android:layout_width="300dp"
             android:layout_height="80dp"
-            android:gravity="center"
             android:background="@android:color/white"
-            android:text="hhhhhhhhhhhhhhh"/>
+            android:gravity="center"
+            android:text="hhhhhhhhhhhhhhh" />
     </com.whx.jetpacktest.widget.shadow.ShadowLayout>
 
     <Button
         android:id="@+id/toWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/to_lottie"
-        app:layout_constraintStart_toEndOf="@id/to_lottie"
-        android:text="to_work"/>
+        android:text="to_work" />
 
     <Button
         android:id="@+id/toDataStore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/to_lottie"
-        app:layout_constraintStart_toEndOf="@id/toWork"
-        android:text="to_datastore"/>
+        android:text="to_datastore" />
+
+    <Button
+        android:id="@+id/toCoord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to_coord" />
+
+    <Button
+        android:id="@+id/toCompose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to_compose"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

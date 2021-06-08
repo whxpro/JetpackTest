@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import com.whx.jetpacktest.compose.ComposeActivity
 import com.whx.jetpacktest.coroutines.CoroTestActivity
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.datastore.DataStoreTestActivity
@@ -26,6 +27,7 @@ import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
 import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import com.whx.jetpacktest.widget.WidgetTestActivity
+import com.whx.jetpacktest.widget.coord.CoordTestActivity
 import com.whx.jetpacktest.widget.lottie.LottieTestActivity
 import com.whx.jetpacktest.widget.statusbar.ActivityBlue
 import com.whx.jetpacktest.workmanager.WorkTestActivity
@@ -104,6 +106,14 @@ class MainActivity : BaseActivity() {
 
         toDataStore.setOnClickListener {
             startActivity(Intent(this, DataStoreTestActivity::class.java))
+        }
+
+        toCoord.setOnClickListener {
+            startActivity(Intent(this, CoordTestActivity::class.java))
+        }
+
+        toCompose.setOnClickListener {
+            startActivity(Intent(this, ComposeActivity::class.java))
         }
     }
 

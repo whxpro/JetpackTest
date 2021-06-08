@@ -67,4 +67,8 @@ abstract class BaseFragment : Fragment() {
         Log.i(TAG, "---onDestroy---")
         super.onDestroy()
     }
+
+    fun onBackPressed() {
+
+    }
 }

@@ -28,11 +28,11 @@ class NHomeFragment : BaseFragment() {
         to_fragB.setOnClickListener {
             val options = navOptions {
                 anim {
-                    enter = R.anim.anim_bottom_in
-                    exit = R.anim.anim_top_out
+                    enter = R.anim.anim_bottom_in                   // fragment b 的进入动画
+                    exit = R.anim.anim_top_out                      // home fragment 的退出动画
 
-                    popEnter = R.anim.anim_top_in
-                    popExit = R.anim.anim_bottom_out
+                    popEnter = R.anim.anim_top_in                   // 从 fragment b 返回时 home fragment 的进入动画
+                    popExit = R.anim.anim_bottom_out                // fragment b 的退出动画
                 }
             }
             NavManager.navigate(NFragmentB::class, null, options)
