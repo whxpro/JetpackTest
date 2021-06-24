@@ -115,6 +115,16 @@ class MainActivity : BaseActivity() {
         toCompose.setOnClickListener {
             startActivity(Intent(this, ComposeActivity::class.java))
         }
+
+        to_widget.viewTreeObserver.addOnPreDrawListener {
+            guide_view?.let {
+                it.setClipCenter(to_widget.x + to_widget.width / 2, to_widget.y + to_widget.height / 2)
+                it.setArea(to_widget.width + 30f, to_widget.height + 30f)
+                it.setCornerRadius(20f)
+                it.update()
+            }
+            true
+        }
     }
 
     override fun onPostResume() {

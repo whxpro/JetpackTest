@@ -26,6 +26,7 @@
         android:id="@+id/to_mvvm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
         android:text="databinding" />
 
     <Button
@@ -33,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginSmall"
+        android:stateListAnimator="@null"
         android:text="to_rx" />
 
     <Button
@@ -40,12 +42,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginSmall"
+        android:stateListAnimator="@null"
         android:text="to_photos" />
 
     <Button
         android:id="@+id/to_vm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
         android:text="to_vm" />
 
     <Button
@@ -53,73 +57,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/marginSmall"
-        android:text="to_viewpager"
-        app:layout_constraintLeft_toRightOf="@id/to_vm"
-        app:layout_constraintTop_toBottomOf="@+id/to_mvvm" />
+        android:stateListAnimator="@null"
+        android:text="to_viewpager" />
 
     <Button
         android:id="@+id/add_shortcut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add_shortcut"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/to_viewpager" />
+        android:stateListAnimator="@null"
+        android:text="add_shortcut" />
 
     <Button
         android:id="@+id/send_notification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="notification"
-        app:layout_constraintLeft_toRightOf="@+id/to_viewpager"
-        app:layout_constraintTop_toTopOf="@+id/to_viewpager" />
+        android:stateListAnimator="@null"
+        android:text="notification" />
 
     <Button
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_nav"
-        app:layout_constraintStart_toEndOf="@+id/add_shortcut"
-        app:layout_constraintTop_toTopOf="@+id/add_shortcut" />
+        android:stateListAnimator="@null"
+        android:text="to_nav" />
 
     <Button
         android:id="@+id/to_coroutine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_coroutine"
-        app:layout_constraintStart_toEndOf="@+id/navigation"
-        app:layout_constraintTop_toTopOf="@+id/add_shortcut" />
+        android:stateListAnimator="@null"
+        android:text="to_coroutine" />
 
     <Button
         android:id="@+id/to_widget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_widget"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_shortcut" />
+        android:stateListAnimator="@null"
+        android:text="to_widget" />
 
     <Button
         android:id="@+id/to_market"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_market"
-        app:layout_constraintStart_toEndOf="@id/to_widget"
-        app:layout_constraintTop_toBottomOf="@+id/add_shortcut" />
+        android:stateListAnimator="@null"
+        android:text="to_market" />
 
     <Button
         android:id="@+id/to_statusbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_statusbar"
-        app:layout_constraintStart_toEndOf="@id/to_market"
-        app:layout_constraintTop_toBottomOf="@id/add_shortcut" />
+        android:stateListAnimator="@null"
+        android:text="to_statusbar" />
 
     <Button
         android:id="@+id/to_lottie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_lottie"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/to_widget" />
+        android:stateListAnimator="@null"
+        android:text="to_lottie" />
 
     <com.whx.jetpacktest.widget.shadow.ShadowLayout
         android:id="@+id/shadowLayout"
@@ -149,24 +144,37 @@
         android:id="@+id/toWork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
         android:text="to_work" />
 
     <Button
         android:id="@+id/toDataStore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
         android:text="to_datastore" />
 
     <Button
         android:id="@+id/toCoord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
         android:text="to_coord" />
 
     <Button
         android:id="@+id/toCompose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="to_compose"/>
+        android:stateListAnimator="@null"
+        android:text="to_compose" />
+
+    <com.whx.jetpacktest.widget.ClipGuideView
+        android:id="@+id/guide_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
