@@ -5,6 +5,8 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.widget.compress.Compressor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_recycler.*
+import java.io.File
 
 class PhotosActivity : BaseActivity() {
 
@@ -79,6 +83,8 @@ class PhotosActivity : BaseActivity() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
         if (requestCode == 233 && permissionGranted(permissions, grantResults)) {
             loadPics()
         } else {
@@ -132,10 +138,23 @@ class PhotoAdapter : RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder>() {
 //                    .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
 //                    .preload()
 
+                Log.e("--------", "origin path: $url, file length: ${File(url).length() / 1024}kb")
+                val files = Compressor.with(itemView.context).setTargetPath(getPath()).load(url).get()
+                val compressFile = files.first()
+                Log.e("--------", compressFile.absolutePath + ", file length: ${compressFile.length() / 1024}kb")
+
                 context.startActivity(Intent(context, PreviewActivity::class.java).apply {
-                    putExtra(PreviewActivity.PHOTO_PATH, url)
+                    putExtra(PreviewActivity.PHOTO_PATH, compressFile.absolutePath)
                 })
             }
+        }
+
+        private fun getPath(): String {
+            val path = context.externalCacheDir?.absolutePath + "/Prac/image/"
+            val file = File(path)
+            return if (file.mkdirs()) {
+                path
+            } else path
         }
     }
 }

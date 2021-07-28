@@ -14,11 +14,13 @@ import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.lifecycle.lifecycleScope
 import com.whx.jetpacktest.compose.ComposeActivity
 import com.whx.jetpacktest.coroutines.CoroTestActivity
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.datastore.DataStoreTestActivity
 import com.whx.jetpacktest.nav.NavHostActivity
+import com.whx.jetpacktest.room.RoomTestActivity
 import com.whx.jetpacktest.rx.RxTestActivity
 import com.whx.jetpacktest.utils.MarketTool
 import com.whx.jetpacktest.widget.imagepick.PhotosActivity
@@ -27,11 +29,14 @@ import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
 import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
 import com.whx.jetpacktest.widget.WidgetTestActivity
+import com.whx.jetpacktest.widget.compress.Compressor
 import com.whx.jetpacktest.widget.coord.CoordTestActivity
 import com.whx.jetpacktest.widget.lottie.LottieTestActivity
 import com.whx.jetpacktest.widget.statusbar.ActivityBlue
 import com.whx.jetpacktest.workmanager.WorkTestActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
+import java.io.File
 
 class MainActivity : BaseActivity() {
 
@@ -50,7 +55,12 @@ class MainActivity : BaseActivity() {
         }
 
         to_photos.setOnClickListener {
-            startActivity(Intent(this, PhotosActivity::class.java))
+//            startActivity(Intent(this, PhotosActivity::class.java))
+            val dir = File("/storage/emulated/0/DCIM/Camera/Prac/Pictures")
+            lifecycleScope.launch {
+                Compressor.with(this@MainActivity).load(dir.listFiles().toList()).setTargetPath("/storage/emulated/0/DCIM/Camera/Prac/image").get()
+                Toast.makeText(this@MainActivity, "compress success", Toast.LENGTH_SHORT).show()
+            }
         }
 
         to_vm.setOnClickListener {
@@ -116,7 +126,15 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, ComposeActivity::class.java))
         }
 
-        to_widget.viewTreeObserver.addOnPreDrawListener {
+        toRoom.setOnClickListener {
+            startActivity(Intent(this, RoomTestActivity::class.java))
+        }
+
+        toTemp.setOnClickListener {
+            startActivity(Intent(this, TmpActivity::class.java))
+        }
+
+        /*to_widget.viewTreeObserver.addOnPreDrawListener {
             guide_view?.let {
                 it.setClipCenter(to_widget.x + to_widget.width / 2, to_widget.y + to_widget.height / 2)
                 it.setArea(to_widget.width + 30f, to_widget.height + 30f)
@@ -124,7 +142,7 @@ class MainActivity : BaseActivity() {
                 it.update()
             }
             true
-        }
+        }*/
     }
 
     override fun onPostResume() {

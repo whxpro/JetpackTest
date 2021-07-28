@@ -85,6 +85,17 @@
             android:theme="@style/Theme.NoTitle" />
 
         <activity android:name=".compose.ComposeActivity" />
+
+        <activity android:name=".room.RoomTestActivity" />
+
+        <activity android:name=".room.AddMusicActivity" />
+
+        <activity android:name=".room.AddUserActivity" />
+
+        <activity
+            android:name=".TmpActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>

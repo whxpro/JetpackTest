@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         app:constraint_referenced_ids="to_mvvm,to_rx,to_photos,to_vm,
         to_viewpager,add_shortcut,send_notification,navigation,to_coroutine,
-        to_widget,to_market,to_statusbar,to_lottie,toWork,toDataStore,toCoord,toCompose"
+        to_widget,to_market,to_statusbar,to_lottie,toWork,toDataStore,toCoord,toCompose,
+        toRoom,toTemp"
         app:flow_horizontalBias="0"
         app:flow_horizontalStyle="packed"
         app:flow_wrapMode="chain"
@@ -168,10 +169,25 @@
         android:stateListAnimator="@null"
         android:text="to_compose" />
 
+    <Button
+        android:id="@+id/toRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:text="to_room" />
+
+    <Button
+        android:id="@+id/toTemp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stateListAnimator="@null"
+        android:text="to_temp" />
+
     <com.whx.jetpacktest.widget.ClipGuideView
         android:id="@+id/guide_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
