@@ -1,13 +1,16 @@
 package com.whx.jetpacktest.utils
 
 import android.annotation.TargetApi
+import android.app.Activity
 import android.content.Context
+import android.graphics.Rect
 import android.os.Build
 import android.util.AttributeSet
 import android.view.*
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
+import com.whx.jetpacktest.NBApplication
 
 object StatusBarUtil {
     private const val STATUS_BAR_VIEW_TAG = "status_bar_view"
@@ -24,6 +27,19 @@ object StatusBarUtil {
                 setStatusBarColorK(window, color)
             }
         }
+    }
+
+    fun getStatusBarHeight(context: Context?): Int {
+        if (context is Activity) {
+            val rect = Rect()
+            context.window.decorView.getWindowVisibleDisplayFrame(rect)
+            return rect.top
+        }
+        val resId = NBApplication.getAppContext().resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resId > 0) {
+            return NBApplication.getAppContext().resources.getDimensionPixelSize(resId)
+        }
+        return 0
     }
 
     private fun setStatusBarColorK(window: Window, @ColorInt color: Int) {

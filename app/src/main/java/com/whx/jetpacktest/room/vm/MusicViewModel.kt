@@ -18,7 +18,8 @@ class MusicViewModel(private val repo: MusicRepository) : ViewModel() {
 }
 
 class MusicViewModelFactory(private val repo: MusicRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MusicViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return MusicViewModel(repo) as T

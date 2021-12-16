@@ -21,7 +21,7 @@ class UserViewModel(private val repo: UserRepository) : ViewModel() {
 }
 
 class UserViewModelFactory(private val repo: UserRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(UserViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return UserViewModel(repo) as T

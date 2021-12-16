@@ -30,7 +30,7 @@ class MyViewModel(private val autoRefresh: AutoRefresh) : ViewModel() {
 }
 
 class MyViewModelFactory(private val autoRefresh: AutoRefresh) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (ViewModel::class.java.isAssignableFrom(modelClass)) {
             return MyViewModel(autoRefresh) as T
         }

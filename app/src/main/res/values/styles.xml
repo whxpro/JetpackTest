@@ -15,6 +15,7 @@
     </style>
 
     <style name="Theme.NoTitle" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 </resources>

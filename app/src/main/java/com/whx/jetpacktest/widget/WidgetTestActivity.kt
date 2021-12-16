@@ -2,9 +2,7 @@ package com.whx.jetpacktest.widget
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +12,7 @@ import com.whx.jetpacktest.R
 import com.whx.jetpacktest.utils.dp
 import kotlinx.android.synthetic.main.activity_widget_test.*
 
-class WidgetTestActivity : BaseActivity() {
+class WidgetTestActivity : BaseActivity(), ActionMode.Callback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -35,11 +33,43 @@ class WidgetTestActivity : BaseActivity() {
 
         scrollView.setTextList(listOf("what", "the", "fuck"))
 
+        selectable_text.customSelectionActionModeCallback = this
     }
 
     override fun onResume() {
         super.onResume()
         marquee_text.startScroll()
+    }
+
+    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        return true
+    }
+
+    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+        val menuInflater = mode?.menuInflater
+        if (menu != null && menuInflater != null) {
+            menu.clear()
+            menuInflater.inflate(R.menu.select_menu, menu)
+
+            return true
+        }
+        return false
+    }
+
+    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.select_item1 -> {
+                Toast.makeText(this, "item 1", Toast.LENGTH_SHORT).show()
+            }
+            R.id.select_item2 -> {
+                Toast.makeText(this, "item 2", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
+    }
+
+    override fun onDestroyActionMode(mode: ActionMode?) {
+
     }
 
     class MAdapter : RecyclerView.Adapter<MViewHolder>() {

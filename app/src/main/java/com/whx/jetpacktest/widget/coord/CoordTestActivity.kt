@@ -16,7 +16,52 @@ class CoordTestActivity : BaseActivity() {
         findViewById<View>(R.id.fragment_container).bringToFront()
 
         to_first.setOnClickListener {
-            supportFragmentManager.beginTransaction().add(R.id.fragment_container, TestFragment1()).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, TestFragment1())
+                .addToBackStack("")
+                .commit()
+        }
+
+        to_second.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                .add(R.id.fragment_container, TestFragment2())
+                .addToBackStack("")
+                .commit()
+        }
+
+        to_third.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                .add(R.id.fragment_container, TestFragment3())
+                .addToBackStack("")
+                .commit()
+        }
+
+        to_fourth.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                .add(R.id.fragment_container, TestFragment4())
+                .addToBackStack("")
+                .commit()
+        }
+
+        to_fifth.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                    .add(R.id.fragment_container, TestFragment5())
+                    .addToBackStack("")
+                    .commit()
         }
     }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.fragments.isNotEmpty()) {
+            supportFragmentManager.popBackStack()
+            return
+        }
+        super.onBackPressed()
+    }
+
+    override fun isLightTheme() = true
 }

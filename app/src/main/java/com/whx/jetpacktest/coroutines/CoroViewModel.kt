@@ -2,11 +2,13 @@ package com.whx.jetpacktest.coroutines
 
 import androidx.lifecycle.*
 import com.whx.jetpacktest.viewmodel.Meizi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
 class CoroViewModel : ViewModel() {
-    private val repo = ReposCoro()
+    private val repo = ReposCoro(Dispatchers.Default)
 
     private val pageLD by lazy { MutableLiveData<String>() }
     val imagesLD = pageLD.switchMap { page ->
@@ -29,5 +31,10 @@ class CoroViewModel : ViewModel() {
 
     fun getImageData(page: String) {
         pageLD.value = page
+    }
+
+    private val _mzState = MutableStateFlow<Meizi?>(null)
+    fun fetchImage(page: String) {
+
     }
 }
