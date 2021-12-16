@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior=".widget.coord.behavior.FaceBehavior">
+        <ImageView
+            android:id="@+id/face_iv"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:src="@mipmap/header"
+            android:scaleType="centerCrop"/>
+
+        <View
+            android:id="@+id/mask_v"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        app:layout_behavior=".widget.coord.behavior.TopBarBehavior">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"/>
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_marginStart="50dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/follow_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follow"
+            android:background="@android:color/holo_orange_dark"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical|end"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/title_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:layout_behavior=".widget.coord.behavior.TitleBarBehavior">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:layout_marginStart="50dp"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Follow"
+            android:background="@android:color/holo_orange_dark"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical|end"/>
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior=".widget.coord.behavior.ContentBehavior">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

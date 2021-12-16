@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@android:color/white">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <com.whx.jetpacktest.widget.coord.appbar.MyAppbarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/holo_blue_light"
+            app:layout_scrollFlags="scroll"/>
 
-    <include layout="@layout/layout_nested_scroll"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:color/holo_green_light"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/holo_orange_light"
+            app:layout_scrollFlags="scroll"/>
+    </com.whx.jetpacktest.widget.coord.appbar.MyAppbarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior=".widget.coord.appbar.MyAppbarLayout$ScrollingViewBehavior">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/test_poem"/>
+    </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
