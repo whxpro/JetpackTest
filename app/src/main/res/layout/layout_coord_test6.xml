@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:ignore="HardcodedText">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/pic1"
+            android:contentDescription="吸顶区域一"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            app:layout_scrollFlags="scroll" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/pic2"
+            android:contentDescription="吸顶区域二"
+            android:gravity="center"
+            app:layout_scrollFlags="enterAlways|scroll" />
+
+        <com.whx.jetpacktest.widget.coord.FloatingLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_scrollFlags="enterAlways|scroll|exitUntilCollapsed">
+
+
+            <ImageView
+                android:id="@+id/text.view3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/pic3"
+                android:contentDescription="吸顶区域三"
+                android:gravity="center"
+                android:text="HEAD3"
+                app:fll_layout_pin="true" />
+
+            <ImageView
+                android:id="@+id/view_may_gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/pic4"
+                android:contentDescription="吸顶区域四"
+                android:gravity="center"
+                android:visibility="visible"
+                app:fll_layout_pin="false" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/pic5"
+                android:contentDescription="吸顶区域五"
+                app:fll_layout_pin="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@color/colorPrimary"
+                android:contentDescription="吸顶区域六"
+                app:fll_layout_pin="false"/>
+        </com.whx.jetpacktest.widget.coord.FloatingLinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+    <Button
+        android:id="@+id/click_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="show"
+        android:layout_gravity="bottom|end"/>
+
+    <Button
+        android:id="@+id/click_expand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="expand"
+        android:layout_gravity="bottom|start"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

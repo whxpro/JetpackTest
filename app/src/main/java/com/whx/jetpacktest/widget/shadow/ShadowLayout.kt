@@ -257,7 +257,7 @@ class ShadowLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
 
 
     private fun initAttributes(context: Context, attrs: AttributeSet?) {
-        val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout) ?: return
+        val attr = context.obtainStyledAttributes(attrs, R.styleable.ShadowLayout)
         try { //默认是显示
             isShowShadow = attr.getBoolean(R.styleable.ShadowLayout_isShowShadow, true)
             leftShow = attr.getBoolean(R.styleable.ShadowLayout_leftShow, true)

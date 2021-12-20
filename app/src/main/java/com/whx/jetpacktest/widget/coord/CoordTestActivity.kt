@@ -53,6 +53,14 @@ class CoordTestActivity : BaseActivity() {
                     .addToBackStack("")
                     .commit()
         }
+
+        to_sixth.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                .add(R.id.fragment_container, TestFragment6())
+                .addToBackStack("")
+                .commit()
+        }
     }
 
     override fun onBackPressed() {

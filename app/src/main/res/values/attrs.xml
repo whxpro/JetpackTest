@@ -126,4 +126,8 @@
              is scrollable. -->
         <attr format="reference" name="layout_scrollInterpolator"/>
     </declare-styleable>
+
+    <declare-styleable name="FloatingLinearLayout_Layout">
+        <attr name="fll_layout_pin" format="boolean"/>
+    </declare-styleable>
 </resources>
