@@ -19,6 +19,7 @@ import com.whx.jetpacktest.compose.ComposeActivity
 import com.whx.jetpacktest.coroutines.CoroTestActivity
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.datastore.DataStoreTestActivity
+import com.whx.jetpacktest.mvi.MviActivity
 import com.whx.jetpacktest.nav.NavHostActivity
 import com.whx.jetpacktest.room.RoomTestActivity
 import com.whx.jetpacktest.rx.RxTestActivity
@@ -132,6 +133,10 @@ class MainActivity : BaseActivity() {
 
         toTemp.setOnClickListener {
             startActivity(Intent(this, TmpActivity::class.java))
+        }
+
+        toMvi.setOnClickListener {
+            startActivity(Intent(this, MviActivity::class.java))
         }
 
         /*to_widget.viewTreeObserver.addOnPreDrawListener {

@@ -33,7 +33,8 @@
             android:authorities="${applicationId}.workmanager-init"
             tools:node="remove" />
 
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -87,11 +88,15 @@
 
         <activity android:name=".compose.ComposeActivity" />
 
+        <activity android:name=".compose.ListActivity" />
+
         <activity android:name=".room.RoomTestActivity" />
 
         <activity android:name=".room.AddMusicActivity" />
 
         <activity android:name=".room.AddUserActivity" />
+
+        <activity android:name=".mvi.MviActivity" />
 
         <activity
             android:name=".TmpActivity"

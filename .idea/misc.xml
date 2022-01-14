@@ -5,15 +5,19 @@
       <map>
         <entry key="../../../../layout/compose-model-1622806907216.xml" value="0.21621621621621623" />
         <entry key="../../../../layout/compose-model-1623067447252.xml" value="0.5" />
+        <entry key="../../../../layout/custom_preview.xml" value="0.240625" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.218" />
+        <entry key="app/src/main/res/drawable/ic_like.xml" value="0.2755208333333333" />
         <entry key="app/src/main/res/drawable/ic_person_black_18dp.xml" value="0.2484375" />
         <entry key="app/src/main/res/layout/activity_coord_test.xml" value="0.20425724637681159" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.20516304347826086" />
+        <entry key="app/src/main/res/layout/activity_mvi_test.xml" value="0.1828774062816616" />
         <entry key="app/src/main/res/layout/activity_recycler.xml" value="0.1453804347826087" />
         <entry key="app/src/main/res/layout/activity_room_add_music.xml" value="0.20425724637681159" />
         <entry key="app/src/main/res/layout/activity_room_add_user.xml" value="0.14895833333333333" />
         <entry key="app/src/main/res/layout/activity_room_test.xml" value="0.20425724637681159" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.18697916666666667" />
+        <entry key="app/src/main/res/layout/activity_viewmodel.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/layout/activity_widget_test.xml" value="0.11413043478260869" />
         <entry key="app/src/main/res/layout/common_image.xml" value="0.20425724637681159" />
         <entry key="app/src/main/res/layout/layout_coord_test1.xml" value="0.1828774062816616" />
@@ -24,8 +28,15 @@
         <entry key="app/src/main/res/layout/layout_coord_test4_2.xml" value="0.1453804347826087" />
         <entry key="app/src/main/res/layout/layout_coord_test5.xml" value="0.13949275362318841" />
         <entry key="app/src/main/res/layout/layout_coord_test6.xml" value="0.13949275362318841" />
+        <entry key="app/src/main/res/layout/layout_drawee.xml" value="0.1490036231884058" />
         <entry key="app/src/main/res/layout/layout_nested_scroll.xml" value="0.1828774062816616" />
+        <entry key="app/src/main/res/layout/layout_rv_item.xml" value="0.1490036231884058" />
         <entry key="app/src/main/res/layout/layout_user_item.xml" value="0.20425724637681159" />
+        <entry key="app/src/main/res/layout/recycler_item.xml" value="0.15172101449275363" />
+        <entry key="app/src/main/res/layout/temp_content.xml" value="0.1490036231884058" />
+        <entry key="app/src/main/res/layout/temp_delete.xml" value="0.1490036231884058" />
+        <entry key="app/src/main/res/layout/temp_item.xml" value="0.1490036231884058" />
+        <entry key="app/src/main/res/layout/view_include.xml" value="0.15172101449275363" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21458333333333332" />
         <entry key="app/src/main/res/menu/select_menu.xml" value="0.21458333333333332" />
       </map>

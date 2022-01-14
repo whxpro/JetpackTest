@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.whx.jetpacktest.NBApplication
 import com.whx.jetpacktest.room.dao.MusicDao
@@ -14,7 +13,7 @@ import com.whx.jetpacktest.room.entity.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [User::class, Library::class, PlayList::class, Song::class, PlaylistSongCrossRef::class], version = 1)
+@Database(entities = [User::class, Library::class, PlayList::class, Song::class, PlaylistSongCrossRef::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 

@@ -31,7 +31,10 @@ data class PlayList(
     var playlistName: String
 )
 
-@Entity
+@Entity(
+    tableName = "song",
+    indices = [Index("song_id")]
+)
 data class Song(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "song_id") var songId: Long = 0,
     val songName: String,

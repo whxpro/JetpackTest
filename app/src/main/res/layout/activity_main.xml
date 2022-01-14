@@ -15,7 +15,7 @@
         app:constraint_referenced_ids="to_mvvm,to_rx,to_photos,to_vm,
         to_viewpager,add_shortcut,send_notification,navigation,to_coroutine,
         to_widget,to_market,to_statusbar,to_lottie,toWork,toDataStore,toCoord,toCompose,
-        toRoom,toTemp"
+        toRoom,toTemp,toMvi"
         app:flow_horizontalBias="0"
         app:flow_horizontalStyle="packed"
         app:flow_wrapMode="chain"
@@ -184,6 +184,12 @@
         android:outlineSpotShadowColor="@color/colorPrimary"
         android:elevation="10dp"
         android:text="to_temp" />
+
+    <Button
+        android:id="@+id/toMvi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="to_mvi"/>
 
     <com.whx.jetpacktest.widget.ClipGuideView
         android:id="@+id/guide_view"

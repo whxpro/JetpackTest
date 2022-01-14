@@ -25,7 +25,7 @@ data class UserWithPlaylists(
 @Entity(primaryKeys = ["play_id", "song_id"])
 data class PlaylistSongCrossRef(
     @ColumnInfo(name = "play_id") val playlistId: Long,
-    @ColumnInfo(name = "song_id") val songId: Long
+    @ColumnInfo(name = "song_id", index = true) val songId: Long
 )
 
 data class PlaylistWithSongs(

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import java.lang.Exception
 import java.util.*
 
 object MarketTool {
@@ -15,16 +14,14 @@ object MarketTool {
     private const val schemaUrl = "market://details?id="
 
     fun startToMarket(context: Context, packageName: String = context.packageName, marketPackageName: String = ""): Boolean {
-        val deviceBrand = Build.BRAND.toUpperCase(Locale.US)
+        val deviceBrand = Build.BRAND.uppercase(Locale.US)
         if (deviceBrand.isBlank()) {
             Log.e(TAG, "can't get device brand")
             return false
         }
         try {
             val mktPackageName =
-                if (marketPackageName.isNotBlank()) marketPackageName else getMarketByBrand(
-                    deviceBrand
-                )
+                if (marketPackageName.isNotBlank()) marketPackageName else getMarketByBrand(deviceBrand)
             if (mktPackageName.isNotBlank()) {
                 openMarket(context, packageName, mktPackageName)
                 return true
@@ -93,6 +90,7 @@ object MarketTool {
         ZUK("ZUK", ""),
         GOOGLE("GOOGLE", "com.android.vending")
     }
+
     private enum class ThirdMarket(val marketPackageName: String) {
         BAIDU("com.baidu.appsearch"),                   // 百度市场
         TENCENT("com.tencent.android.qqdownloader"),    // 应用宝
