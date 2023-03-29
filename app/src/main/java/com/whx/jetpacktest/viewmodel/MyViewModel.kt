@@ -9,7 +9,7 @@ class MyViewModel(private val autoRefresh: AutoRefresh) : ViewModel() {
     private val beans = arrayListOf<Map<String, Any>>()
 
     init {
-        response = Transformations.switchMap(id) {input ->  
+        response = id.switchMap {input ->
             if (input == null) {
                 MutableLiveData()
             } else {

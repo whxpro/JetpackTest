@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.whx.jetpacktest.R
-import kotlinx.android.synthetic.main.layout_rv_item.view.*
+import com.whx.jetpacktest.databinding.LayoutRvItemBinding
 
 class RvAdapter : ListAdapter<ImageUiState, RvHolder>(MeiziItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
@@ -32,15 +32,17 @@ class RvAdapter : ListAdapter<ImageUiState, RvHolder>(MeiziItemCallback()) {
 class RvHolder(parent: ViewGroup) :
     RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.layout_rv_item, parent, false)) {
 
+    private val binding: LayoutRvItemBinding = LayoutRvItemBinding.bind(itemView)
+
     fun bind(imageUiState: ImageUiState) {
         itemView.run {
             val meizi = imageUiState.picsumBean
-            title.text = meizi.author
-            subtitle.text = meizi.url
-            Glide.with(context).load(meizi.downloadUrl).into(portrait)
+            binding.title.text = meizi.author
+            binding.subtitle.text = meizi.url
+            Glide.with(context).load(meizi.downloadUrl).into(binding.portrait)
 
-            like_btn.isSelected = meizi.liked
-            like_btn.setOnClickListener {
+            binding.likeBtn.isSelected = meizi.liked
+            binding.likeBtn.setOnClickListener {
                 val like = !it.isSelected
                 it.isSelected = like
                 imageUiState.onClickLike.invoke(meizi.id, like)

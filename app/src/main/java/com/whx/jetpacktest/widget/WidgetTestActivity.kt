@@ -9,17 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.ActivityWidgetTestBinding
 import com.whx.jetpacktest.utils.dp
-import kotlinx.android.synthetic.main.activity_widget_test.*
 
 class WidgetTestActivity : BaseActivity(), ActionMode.Callback {
+    private lateinit var binding: ActivityWidgetTestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityWidgetTestBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_widget_test)
-
-        list.layoutManager = LinearLayoutManager(this)
-        list.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        binding.list.layoutManager = LinearLayoutManager(this)
+        binding.list.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -29,16 +30,16 @@ class WidgetTestActivity : BaseActivity(), ActionMode.Callback {
                 outRect.bottom = 10.dp().toInt()
             }
         })
-        list.adapter = MAdapter()
+        binding.list.adapter = MAdapter()
 
-        scrollView.setTextList(listOf("what", "the", "fuck"))
+        binding.scrollView.setTextList(listOf("what", "the", "fuck"))
 
-        selectable_text.customSelectionActionModeCallback = this
+        binding.selectableText.customSelectionActionModeCallback = this
     }
 
     override fun onResume() {
         super.onResume()
-        marquee_text.startScroll()
+        binding.marqueeText.startScroll()
     }
 
     override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {

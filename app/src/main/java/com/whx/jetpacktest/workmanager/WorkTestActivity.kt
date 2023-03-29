@@ -1,26 +1,29 @@
 package com.whx.jetpacktest.workmanager
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.work.*
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
-import kotlinx.android.synthetic.main.activity_work_test.*
+import com.whx.jetpacktest.databinding.ActivityWorkTestBinding
 import java.util.concurrent.TimeUnit
 
 class WorkTestActivity : BaseActivity() {
 
     private lateinit var mWorkManager: WorkManager
+    private lateinit var binding: ActivityWorkTestBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mWorkManager = WorkManager.getInstance(this)
 
+        binding = ActivityWorkTestBinding.inflate(LayoutInflater.from(this))
         setContentView(R.layout.activity_work_test)
 
-        startCalculate.setOnClickListener {
+        binding.startCalculate.setOnClickListener {
             makeOneTimeTask()
         }
 
@@ -45,11 +48,17 @@ class WorkTestActivity : BaseActivity() {
         val workRequest = OneTimeWorkRequestBuilder<CalculateWork>()
             /*.setConstraints(constraint)*/
             /*.setInitialDelay(1L, TimeUnit.MINUTES)*/         // 如果工作没有约束，或者当工作加入队列时所有约束都得到了满足，那么系统可能会选择立即运行该工作。如果不希望工作立即运行，可以将工作指定为在经过一段最短初始延迟时间后再启动。
-            .setBackoffCriteria(BackoffPolicy.LINEAR, OneTimeWorkRequest.MIN_BACKOFF_MILLIS, TimeUnit.MILLISECONDS)     // 如果doWork 返回Result.retry()，系统会根据退避延迟时间 和 退避政策重试work，本例中延时时间10s
+            .setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                WorkRequest.MIN_BACKOFF_MILLIS,
+                TimeUnit.MILLISECONDS
+            )     // 如果doWork 返回Result.retry()，系统会根据退避延迟时间 和 退避政策重试work，本例中延时时间10s
             .addTag(CalculateWork.CAL_TAG)
-            .setInputData(workDataOf(
-                CalculateWork.KEY_INPUT_DATA to 1
-            ))
+            .setInputData(
+                workDataOf(
+                    CalculateWork.KEY_INPUT_DATA to 1
+                )
+            )
             .build()
 
         mWorkManager.cancelAllWorkByTag(CalculateWork.CAL_TAG)
@@ -59,7 +68,11 @@ class WorkTestActivity : BaseActivity() {
     private fun makePeriodTask() {
         val workRequest = PeriodicWorkRequestBuilder<TimedWork>(15, TimeUnit.MINUTES).build()
 
-        mWorkManager.enqueueUniquePeriodicWork("attention", ExistingPeriodicWorkPolicy.KEEP, workRequest) // 唯一工作，避免enqueue 多个相同工作
+        mWorkManager.enqueueUniquePeriodicWork(
+            "attention",
+            ExistingPeriodicWorkPolicy.KEEP,
+            workRequest
+        ) // 唯一工作，避免enqueue 多个相同工作
     }
 
     private fun cancelTask(tag: String) {
@@ -90,7 +103,7 @@ class WorkTestActivity : BaseActivity() {
                     val progress = it.progress
                     val value = progress.getInt(ProgressWork.PROGRESS, 0)
 
-                    text?.text = value.toString()
+                    binding.text.text = value.toString()
                 }
             })
     }

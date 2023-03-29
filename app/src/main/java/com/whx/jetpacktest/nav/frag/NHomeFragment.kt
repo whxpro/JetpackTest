@@ -7,25 +7,26 @@ import android.view.ViewGroup
 import androidx.navigation.navOptions
 import com.whx.jetpacktest.BaseFragment
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.FragmentNavHomeBinding
 import com.whx.jetpacktest.nav.NavManager
-import kotlinx.android.synthetic.main.fragment_nav_home.*
 
 class NHomeFragment : BaseFragment() {
-
+    private lateinit var binding: FragmentNavHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_nav_home, container, false)
+    ): View {
+        binding = FragmentNavHomeBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        to_fragA.setOnClickListener {
+        binding.toFragA.setOnClickListener {
             NavManager.navigate(NFragmentA::class)
         }
-        to_fragB.setOnClickListener {
+        binding.toFragB.setOnClickListener {
             val options = navOptions {
                 anim {
                     enter = R.anim.anim_bottom_in                   // fragment b 的进入动画

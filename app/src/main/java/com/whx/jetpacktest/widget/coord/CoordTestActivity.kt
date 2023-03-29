@@ -1,28 +1,29 @@
 package com.whx.jetpacktest.widget.coord
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
-import kotlinx.android.synthetic.main.activity_coord_test.*
+import com.whx.jetpacktest.databinding.ActivityCoordTestBinding
 
 class CoordTestActivity : BaseActivity() {
-
+    private lateinit var binding: ActivityCoordTestBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_coord_test)
+        binding = ActivityCoordTestBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         findViewById<View>(R.id.fragment_container).bringToFront()
 
-        to_first.setOnClickListener {
+        binding.toFirst.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, TestFragment1())
                 .addToBackStack("")
                 .commit()
         }
 
-        to_second.setOnClickListener {
+        binding.toSecond.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
                 .add(R.id.fragment_container, TestFragment2())
@@ -30,7 +31,7 @@ class CoordTestActivity : BaseActivity() {
                 .commit()
         }
 
-        to_third.setOnClickListener {
+        binding.toThird.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
                 .add(R.id.fragment_container, TestFragment3())
@@ -38,7 +39,7 @@ class CoordTestActivity : BaseActivity() {
                 .commit()
         }
 
-        to_fourth.setOnClickListener {
+        binding.toFourth.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
                 .add(R.id.fragment_container, TestFragment4())
@@ -46,15 +47,15 @@ class CoordTestActivity : BaseActivity() {
                 .commit()
         }
 
-        to_fifth.setOnClickListener {
+        binding.toFifth.setOnClickListener {
             supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
-                    .add(R.id.fragment_container, TestFragment5())
-                    .addToBackStack("")
-                    .commit()
+                .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
+                .add(R.id.fragment_container, TestFragment5())
+                .addToBackStack("")
+                .commit()
         }
 
-        to_sixth.setOnClickListener {
+        binding.toSixth.setOnClickListener {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(R.anim.anim_right_in, R.anim.anim_right_out)
                 .add(R.id.fragment_container, TestFragment6())

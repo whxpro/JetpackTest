@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
 import com.whx.jetpacktest.utils.StatusBarUtil
-import kotlinx.android.synthetic.main.fragment_nav_common.*
 
 class ActivityBlack : BaseActivity() {
 
@@ -16,7 +16,7 @@ class ActivityBlack : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_nav_common)
 
-        center_text.setOnClickListener {
+        findViewById<View>(R.id.center_text).setOnClickListener {
             startActivity(Intent(this, ActivityWhite::class.java))
         }
 

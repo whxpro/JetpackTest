@@ -32,7 +32,7 @@ class RemoteViewTest {
 
         val intent = Intent(context, PhotosActivity::class.java)
         val requestId = 233
-        val pendingIntent = PendingIntent.getActivity(context, requestId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(context, requestId, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE)
         builder.setContentIntent(pendingIntent)
         createNotificationChannel(context, channelId)
         manager.notify(requestId, builder.build())

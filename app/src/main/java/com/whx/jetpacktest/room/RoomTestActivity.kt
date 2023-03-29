@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.ActivityRoomTestBinding
 import com.whx.jetpacktest.room.entity.User
 import com.whx.jetpacktest.room.entity.UserWithPlaylists
 import com.whx.jetpacktest.room.repo.MusicRepository
@@ -16,7 +18,6 @@ import com.whx.jetpacktest.room.vm.MusicViewModel
 import com.whx.jetpacktest.room.vm.MusicViewModelFactory
 import com.whx.jetpacktest.room.vm.UserViewModel
 import com.whx.jetpacktest.room.vm.UserViewModelFactory
-import kotlinx.android.synthetic.main.activity_room_test.*
 
 class RoomTestActivity : BaseActivity(), ItemClickListener {
     private val mDb by lazy { AppDatabase.getDatabase(this) }
@@ -31,22 +32,25 @@ class RoomTestActivity : BaseActivity(), ItemClickListener {
 
     private val mAdapter by lazy { UserAdapter(this) }
 
+    private lateinit var binding: ActivityRoomTestBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room_test)
+        binding = ActivityRoomTestBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         initRecyclerView()
 
-        mMusicViewModel.allUserWithPlaylists.observe(this, { users ->
+        mMusicViewModel.allUserWithPlaylists.observe(this) { users ->
             users?.let {
                 mAdapter.submitList(it)
                 if (it.size > 2) {
                     delayDeleteLast(it.last().user)
                 }
             }
-        })
+        }
 
-        fab.setOnClickListener {
+        binding.fab.setOnClickListener {
             startActivity(Intent(this, AddUserActivity::class.java))
         }
     }

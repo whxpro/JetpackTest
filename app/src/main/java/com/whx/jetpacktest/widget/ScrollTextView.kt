@@ -11,10 +11,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.animation.doOnEnd
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewTreeLifecycleOwner
-import androidx.lifecycle.findViewTreeLifecycleOwner
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import com.whx.jetpacktest.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -51,7 +48,7 @@ class ScrollTextView @JvmOverloads constructor(
     private val exitSet = AnimatorSet()
 
     init {
-        ViewTreeLifecycleOwner.set(this, context as? LifecycleOwner)
+        setViewTreeLifecycleOwner(context as? LifecycleOwner)
         initTextView()
 
     }

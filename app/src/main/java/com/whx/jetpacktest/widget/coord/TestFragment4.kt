@@ -136,8 +136,9 @@ class TestFragment4 : BaseFragment() {
         }
     }) {
         fun bindUrl(url: String) {
-            if (itemView is WebView) {
-                itemView.loadUrl(url)
+            val v = itemView
+            if (v is WebView) {
+                v.loadUrl(url)
             }
         }
     }

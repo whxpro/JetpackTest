@@ -3,6 +3,7 @@ package com.whx.jetpacktest.widget.refresh
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,27 +12,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.ActivityTestRefreshBinding
 import com.whx.jetpacktest.utils.dp
 import com.whx.jetpacktest.utils.toast
-import kotlinx.android.synthetic.main.activity_test_refresh.*
 
 class TestRefreshActivity : BaseActivity() {
-
+    private lateinit var binding: ActivityTestRefreshBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test_refresh)
+        binding = ActivityTestRefreshBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         initView()
     }
 
     private var hasHint = true
     private fun initView() {
-        test_list.layoutManager = LinearLayoutManager(this)
+        binding.testList.layoutManager = LinearLayoutManager(this)
         val adapter = TestAdapter()
-        test_list.adapter = adapter
+        binding.testList.adapter = adapter
 
-        refresh_container.setHeadView(SimpleLoadingHead(this))
-        refresh_container.setOnRefreshListener(object : DWRefreshLayout.OnRefreshListener {
+        binding.refreshContainer.setHeadView(SimpleLoadingHead(this))
+        binding.refreshContainer.setOnRefreshListener(object : DWRefreshLayout.OnRefreshListener {
             override fun onLoadMore() {
                 toast("load more")
             }
@@ -43,16 +45,30 @@ class TestRefreshActivity : BaseActivity() {
                 toast("refresh")
                 Handler().postDelayed({
                     toast("complete")
-                    refresh_container.refreshComplete()
+                    binding.refreshContainer.refreshComplete()
                     adapter.setHasHint(false)
                     hasHint = false
                 }, 1000)
             }
         })
 
-        adapter.setData(arrayListOf("hhhhhhh", "lllllllll", "dddddd", "gggggggg", "kkkkkkkkk", "aaaaaaaaaa", "bbbbbbbbb", "cccccccc", "eeeeeeeee", "fffffffff", "iiiiiiiii"))
+        adapter.setData(
+            arrayListOf(
+                "hhhhhhh",
+                "lllllllll",
+                "dddddd",
+                "gggggggg",
+                "kkkkkkkkk",
+                "aaaaaaaaaa",
+                "bbbbbbbbb",
+                "cccccccc",
+                "eeeeeeeee",
+                "fffffffff",
+                "iiiiiiiii"
+            )
+        )
 
-        change.setOnClickListener {
+        binding.change.setOnClickListener {
             if (hasHint) {
                 adapter.setHasHint(false)
             } else {
@@ -129,14 +145,17 @@ class TestAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 }
+
 class HintViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
 }
+
 class TestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun bindView(text: String) {
-        if (itemView is TextView) {
-            itemView.text = text
+        val v = itemView
+        if (v is TextView) {
+            v.text = text
         }
     }
 }

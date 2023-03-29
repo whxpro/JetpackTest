@@ -2,6 +2,7 @@ package com.whx.jetpacktest.datastore
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
@@ -13,44 +14,51 @@ import androidx.lifecycle.lifecycleScope
 import com.tencent.mmkv.MMKV
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.NBApplication
-import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.ActivityDatastoreTestBinding
 import com.whx.jetpacktest.protobuf.BeautyProto
 import com.whx.jetpacktest.viewmodel.Meizi
-import kotlinx.android.synthetic.main.activity_datastore_test.*
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.lang.Exception
 import kotlin.system.measureTimeMillis
 
 class DataStoreTestActivity : BaseActivity() {
 
     private val prefDataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
-    private val protoDataStore: DataStore<BeautyProto.Beauty> by dataStore(fileName = "proto_setting", serializer = BeautyPrefSerial)
+    private val protoDataStore: DataStore<BeautyProto.Beauty> by dataStore(
+        fileName = "proto_setting",
+        serializer = BeautyPrefSerial
+    )
 
     private val EXAMPLE_INT = intPreferencesKey("example")
 
+    private lateinit var binding: ActivityDatastoreTestBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_datastore_test)
+        binding = ActivityDatastoreTestBinding.inflate(LayoutInflater.from(this))
 
-        get_pref_btn.setOnClickListener {
+        setContentView(binding.root)
+
+        binding.getPrefBtn.setOnClickListener {
             /*lifecycleScope.launch {
                 DataStoreUtil.getString("test_str").collect {
                     pref_datastore_edit.setText(it)
                 }
             }*/
-            pref_datastore_edit.setText(DataStoreUtil.getStringSync("test_str"))
+            binding.prefDatastoreEdit.setText(DataStoreUtil.getStringSync("test_str"))
         }
 
-        set_pref_btn.setOnClickListener {
+        binding.setPrefBtn.setOnClickListener {
             lifecycleScope.launch {
-                val text = pref_datastore_edit.text.toString()
+                val text = binding.prefDatastoreEdit.text.toString()
 
                 try {
                     DataStoreUtil.putString("test_str", text)
@@ -60,7 +68,7 @@ class DataStoreTestActivity : BaseActivity() {
             }
         }
 
-        get_proto_btn.setOnClickListener {
+        binding.getProtoBtn.setOnClickListener {
             lifecycleScope.launch {
                 Log.e("----------", "before delay current thread: ${Thread.currentThread().name}")
                 delay(5000)
@@ -68,28 +76,28 @@ class DataStoreTestActivity : BaseActivity() {
                     beauty.name
                 }.collect {
                     Log.e("----------", "current thread: ${Thread.currentThread().name}")
-                    proto_datastore_edit.setText(it)
+                    binding.protoDatastoreEdit.setText(it)
                 }
             }
         }
 
-        set_proto_btn.setOnClickListener {
+        binding.setProtoBtn.setOnClickListener {
             lifecycleScope.launch {
-                proto_datastore_edit.text.takeIf { it.isNotBlank() }?.let {
+                binding.protoDatastoreEdit.text.takeIf { it.isNotBlank() }?.let {
                     setProtoData(Meizi(name = it.toString()))
                 }
             }
         }
 
-        test_sp.setOnClickListener {
+        binding.testSp.setOnClickListener {
             testSp()
         }
 
-        test_data_store.setOnClickListener {
+        binding.testDataStore.setOnClickListener {
             testDs()
         }
 
-        test_mmkv.setOnClickListener {
+        binding.testMmkv.setOnClickListener {
             testMMKV()
         }
     }
@@ -104,6 +112,7 @@ class DataStoreTestActivity : BaseActivity() {
             }
         }
     }
+
     private suspend fun writePreferences(data: Int?) {
         prefDataStore.edit { setting ->
             setting[EXAMPLE_INT] = data ?: 0
@@ -118,6 +127,7 @@ class DataStoreTestActivity : BaseActivity() {
             throw it
         }
     }
+
     private suspend fun setProtoData(m: Meizi) {
         protoDataStore.updateData { beaury ->
             beaury.toBuilder().setName(m.name).build()
@@ -150,7 +160,7 @@ class DataStoreTestActivity : BaseActivity() {
                 mSp.edit().putString("hhh", "${os}_$it").apply()
             }
         }
-        test_sp_time.text = "$time ms"
+        binding.testSpTime.text = "$time ms"
     }
 
     private val testKey = stringPreferencesKey("test")
@@ -168,7 +178,7 @@ class DataStoreTestActivity : BaseActivity() {
                     }
                 }
             }
-            test_ds_time.text = "$time ms"
+            binding.testDsTime.text = "$time ms"
         }
     }
 
@@ -181,6 +191,6 @@ class DataStoreTestActivity : BaseActivity() {
                 kv?.encode("hhh", "${os}_$it")
             }
         }
-        test_mmkv_time.text = "$time ms"
+        binding.testMmkvTime.text = "$time ms"
     }
 }

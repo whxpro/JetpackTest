@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -18,24 +17,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.ActivityRecyclerBinding
 import com.whx.jetpacktest.widget.compress.Compressor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_recycler.*
 import java.io.File
 
 class PhotosActivity : BaseActivity() {
-
+    private lateinit var binding: ActivityRecyclerBinding
     private var adapter: PhotoAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recycler)
+        binding = ActivityRecyclerBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
         adapter = PhotoAdapter()
-        recycler_view.layoutManager = GridLayoutManager(this, 3)
-        recycler_view.adapter = adapter
-        recycler_view.addItemDecoration(object : RecyclerView.ItemDecoration() {
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
             override fun getItemOffsets(
                 outRect: Rect,
                 view: View,
@@ -47,10 +47,18 @@ class PhotosActivity : BaseActivity() {
             }
         })
 
-        if (checkPermissionsGranted(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (checkPermissionsGranted(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        ) {
             loadPics()
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 233)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                233
+            )
         }
     }
 
@@ -65,8 +73,10 @@ class PhotosActivity : BaseActivity() {
             })
     }
 
-    private fun permissionGranted(permissions: Array<out String>,
-                                  grantResults: IntArray): Boolean {
+    private fun permissionGranted(
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ): Boolean {
         if (permissions.size == grantResults.size) {
             for (gr in grantResults) {
                 if (gr != PackageManager.PERMISSION_GRANTED) {

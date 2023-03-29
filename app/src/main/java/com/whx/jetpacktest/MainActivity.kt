@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -17,6 +17,7 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.lifecycle.lifecycleScope
 import com.whx.jetpacktest.compose.ComposeActivity
 import com.whx.jetpacktest.coroutines.CoroTestActivity
+import com.whx.jetpacktest.databinding.ActivityMainBinding
 import com.whx.jetpacktest.databinding.SimpleDatabindingActivity
 import com.whx.jetpacktest.datastore.DataStoreTestActivity
 import com.whx.jetpacktest.mvi.MviActivity
@@ -24,118 +25,118 @@ import com.whx.jetpacktest.nav.NavHostActivity
 import com.whx.jetpacktest.room.RoomTestActivity
 import com.whx.jetpacktest.rx.RxTestActivity
 import com.whx.jetpacktest.utils.MarketTool
-import com.whx.jetpacktest.widget.imagepick.PhotosActivity
-import com.whx.jetpacktest.widget.RemoteViewTest
-import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
-import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.viewmodel.ViewModelActivity
+import com.whx.jetpacktest.widget.RemoteViewTest
 import com.whx.jetpacktest.widget.WidgetTestActivity
 import com.whx.jetpacktest.widget.compress.Compressor
 import com.whx.jetpacktest.widget.coord.CoordTestActivity
+import com.whx.jetpacktest.widget.cycle_viewpager.ViewpagerActivity
 import com.whx.jetpacktest.widget.lottie.LottieTestActivity
+import com.whx.jetpacktest.widget.refresh.TestRefreshActivity
 import com.whx.jetpacktest.widget.statusbar.ActivityBlue
 import com.whx.jetpacktest.workmanager.WorkTestActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.launch
 import java.io.File
 
 class MainActivity : BaseActivity() {
-
+    private lateinit var binding: ActivityMainBinding
     private val mHandler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
-        to_mvvm.setOnClickListener {
+        binding.toMvvm.setOnClickListener {
             startActivity(Intent(this, SimpleDatabindingActivity::class.java))
         }
 
-        to_rx.setOnClickListener {
+        binding.toRx.setOnClickListener {
             startActivity(Intent(this, RxTestActivity::class.java))
         }
 
-        to_photos.setOnClickListener {
+        binding.toPhotos.setOnClickListener {
 //            startActivity(Intent(this, PhotosActivity::class.java))
             val dir = File("/storage/emulated/0/DCIM/Camera/Prac/Pictures")
             lifecycleScope.launch {
-                Compressor.with(this@MainActivity).load(dir.listFiles().toList()).setTargetPath("/storage/emulated/0/DCIM/Camera/Prac/image").get()
+                Compressor.with(this@MainActivity).load(dir.listFiles().toList())
+                    .setTargetPath("/storage/emulated/0/DCIM/Camera/Prac/image").get()
                 Toast.makeText(this@MainActivity, "compress success", Toast.LENGTH_SHORT).show()
             }
         }
 
-        to_vm.setOnClickListener {
+        binding.toVm.setOnClickListener {
             startActivity(Intent(this, ViewModelActivity::class.java))
         }
 
-        to_viewpager.setOnClickListener {
+        binding.toViewpager.setOnClickListener {
             startActivity(Intent(this, ViewpagerActivity::class.java))
         }
 
-        add_shortcut.setOnClickListener {
+        binding.addShortcut.setOnClickListener {
             mHandler.postDelayed({
                 Toast.makeText(this, "what the fuck", Toast.LENGTH_SHORT).show()
             }, 5000)
             add("hhh", "测试")
         }
 
-        send_notification.setOnClickListener {
+        binding.sendNotification.setOnClickListener {
             RemoteViewTest().initNotification(this)
         }
 
-        to_refresh.setOnClickListener {
+        binding.toRefresh.setOnClickListener {
             startActivity(Intent(this, TestRefreshActivity::class.java))
         }
 
-        navigation.setOnClickListener {
+        binding.navigation.setOnClickListener {
             startActivity(Intent(this, NavHostActivity::class.java))
         }
 
-        to_coroutine.setOnClickListener {
+        binding.toCoroutine.setOnClickListener {
             startActivity(Intent(this, CoroTestActivity::class.java))
         }
 
-        to_widget.setOnClickListener {
+        binding.toWidget.setOnClickListener {
             startActivity(Intent(this, WidgetTestActivity::class.java))
         }
 
-        to_market.setOnClickListener {
+        binding.toMarket.setOnClickListener {
             MarketTool.startToMarket(this)
         }
 
-        to_statusbar.setOnClickListener {
+        binding.toStatusbar.setOnClickListener {
             startActivity(Intent(this, ActivityBlue::class.java))
         }
 
-        to_lottie.setOnClickListener {
+        binding.toLottie.setOnClickListener {
             startActivity(Intent(this, LottieTestActivity::class.java))
         }
 
-        toWork.setOnClickListener {
+        binding.toWork.setOnClickListener {
             startActivity(Intent(this, WorkTestActivity::class.java))
         }
 
-        toDataStore.setOnClickListener {
+        binding.toDataStore.setOnClickListener {
             startActivity(Intent(this, DataStoreTestActivity::class.java))
         }
 
-        toCoord.setOnClickListener {
+        binding.toCoord.setOnClickListener {
             startActivity(Intent(this, CoordTestActivity::class.java))
         }
 
-        toCompose.setOnClickListener {
+        binding.toCompose.setOnClickListener {
             startActivity(Intent(this, ComposeActivity::class.java))
         }
 
-        toRoom.setOnClickListener {
+        binding.toRoom.setOnClickListener {
             startActivity(Intent(this, RoomTestActivity::class.java))
         }
 
-        toTemp.setOnClickListener {
+        binding.toTemp.setOnClickListener {
             startActivity(Intent(this, TmpActivity::class.java))
         }
 
-        toMvi.setOnClickListener {
+        binding.toMvi.setOnClickListener {
             startActivity(Intent(this, MviActivity::class.java))
         }
 
@@ -153,6 +154,7 @@ class MainActivity : BaseActivity() {
     override fun onPostResume() {
         super.onPostResume()
     }
+
     override fun onPause() {
         Log.e("-------", "pause")
         super.onPause()
@@ -178,7 +180,7 @@ class MainActivity : BaseActivity() {
             val callbackIntent = PendingIntent.getBroadcast(
                 context, 233,
                 Intent(context, CallbackReceiver::class.java),
-                PendingIntent.FLAG_UPDATE_CURRENT
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_MUTABLE
             )
             ShortcutManagerCompat.requestPinShortcut(
                 context,
@@ -190,10 +192,12 @@ class MainActivity : BaseActivity() {
             //            addShortcutLowOs(context);
         }
     }
+
     class CallbackReceiver : BroadcastReceiver() {
         override fun onReceive(
             context: Context,
-            intent: Intent) {
+            intent: Intent
+        ) {
             Toast.makeText(NBApplication.getAppContext(), "success", Toast.LENGTH_SHORT).show()
         }
     }

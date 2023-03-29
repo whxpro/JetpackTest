@@ -8,44 +8,45 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 import com.whx.jetpacktest.BaseFragment
 import com.whx.jetpacktest.R
+import com.whx.jetpacktest.databinding.FragmentNavMainBinding
 import com.whx.jetpacktest.nav.adapter.FragAdapter
-import kotlinx.android.synthetic.main.fragment_nav_main.*
 
 class NavMainFragment : BaseFragment() {
-
+    private lateinit var binding: FragmentNavMainBinding
     private var prePosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_nav_main, container, false)
+    ): View {
+        binding = FragmentNavMainBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        pager_container.adapter = FragAdapter(this)
+        binding.pagerContainer.adapter = FragAdapter(this)
 
         setupBottomNav()
     }
 
     private fun setupBottomNav() {
-        bottom_nav.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED   // 菜单标题一直显示
-        bottom_nav.setOnNavigationItemSelectedListener {
+        binding.bottomNav.labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED   // 菜单标题一直显示
+        binding.bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> pager_container.setCurrentItem(FragAdapter.HOME, false)
-                R.id.explore -> pager_container.setCurrentItem(FragAdapter.EXPLORE, false)
-                R.id.favorite -> pager_container.setCurrentItem(FragAdapter.FAVORITE, false)
-                R.id.person -> pager_container.setCurrentItem(FragAdapter.PERSON, false)
+                R.id.home -> binding.pagerContainer.setCurrentItem(FragAdapter.HOME, false)
+                R.id.explore -> binding.pagerContainer.setCurrentItem(FragAdapter.EXPLORE, false)
+                R.id.favorite -> binding.pagerContainer.setCurrentItem(FragAdapter.FAVORITE, false)
+                R.id.person -> binding.pagerContainer.setCurrentItem(FragAdapter.PERSON, false)
             }
             true
         }
-        prePosition = pager_container.currentItem
-        pager_container.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        prePosition = binding.pagerContainer.currentItem
+        binding.pagerContainer.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                bottom_nav.menu.getItem(position).isChecked = true
+                binding.bottomNav.menu.getItem(position).isChecked = true
             }
         })
     }

@@ -26,7 +26,7 @@ object NavManager {
     }
 
     fun backToMain(clearSelf: Boolean = true) {
-        goBackTo(mNavController.graph.startDestination, clearSelf)
+        goBackTo(mNavController.graph.startDestinationId, clearSelf)
     }
 
     fun goBackTo(destinationId: Int, clearSelf: Boolean = false) {

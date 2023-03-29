@@ -107,8 +107,9 @@ class TestFragment2 : BaseFragment() {
     }) {
 
         fun bind(text: String) {
-            if (itemView is TextView) {
-                itemView.text = text
+            val v = itemView
+            if (v is TextView) {
+                v.text = text
             }
         }
     }

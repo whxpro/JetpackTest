@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
 import com.whx.jetpacktest.databinding.ActivityViewmodelBinding
-import kotlinx.android.synthetic.main.activity_viewmodel.*
+
 
 class ViewModelActivity : BaseActivity() {
 
@@ -30,6 +30,6 @@ class ViewModelActivity : BaseActivity() {
     }
 
     fun confirmClick() {
-        viewmodel?.id?.value = edit_text.text.toString()
+        viewmodel?.id?.value = viewDatabinding.editText.text.toString()
     }
 }

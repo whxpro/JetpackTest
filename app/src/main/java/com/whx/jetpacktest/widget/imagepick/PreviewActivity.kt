@@ -1,21 +1,24 @@
 package com.whx.jetpacktest.widget.imagepick
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.whx.jetpacktest.BaseActivity
-import com.whx.jetpacktest.R
-import kotlinx.android.synthetic.main.common_image.*
+import com.whx.jetpacktest.databinding.CommonImageBinding
 
 class PreviewActivity : BaseActivity() {
 
     companion object {
         const val PHOTO_PATH = "photo_url"
     }
+
+    private lateinit var binding: CommonImageBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.common_image)
+        binding = CommonImageBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 //        val layoutParams = image.layoutParams
 //        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
 //        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
@@ -48,9 +51,9 @@ class PreviewActivity : BaseActivity() {
             .load(url)
             .thumbnail(0.18f)
             .transition(DrawableTransitionOptions.withCrossFade())
-            .into(image)
+            .into(binding.image)
 
-        preview_container.setOnClickListener {
+        binding.previewContainer.setOnClickListener {
             onBackPressed()
         }
     }

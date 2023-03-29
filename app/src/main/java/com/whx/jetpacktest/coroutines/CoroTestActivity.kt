@@ -2,19 +2,21 @@ package com.whx.jetpacktest.coroutines
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.whx.jetpacktest.BaseActivity
-import com.whx.jetpacktest.R
-import kotlinx.android.synthetic.main.activity_recycler.*
+import com.whx.jetpacktest.databinding.ActivityRecyclerBinding
 import kotlin.math.max
 
 class CoroTestActivity : BaseActivity() {
     private val imageVM by viewModels<CoroViewModel>()
     private var page = 1
+
+    private lateinit var binding: ActivityRecyclerBinding
 
     init {
         lifecycleScope.launchWhenCreated {
@@ -32,12 +34,13 @@ class CoroTestActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_recycler)
+        binding = ActivityRecyclerBinding.inflate(LayoutInflater.from(this))
+        setContentView(binding.root)
 
-        recycler_view.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
-        recycler_view.adapter = imageVM.adapter
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2, RecyclerView.VERTICAL)
+        binding.recyclerView.adapter = imageVM.adapter
 
-        recycler_view.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 val lm = recyclerView.layoutManager as StaggeredGridLayoutManager
 

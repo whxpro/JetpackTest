@@ -4,22 +4,13 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.whx.jetpacktest.BaseActivity
 import com.whx.jetpacktest.R
 import com.whx.jetpacktest.utils.dp
 import com.whx.jetpacktest.utils.toast
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.launch
 
 class MviActivity : BaseActivity() {
 
@@ -69,6 +60,9 @@ class MviActivity : BaseActivity() {
                     FetchStatus.Error -> {
                         toast("error")
                     }
+                    else -> {
+                        toast("wtf")
+                    }
                 }
             }
         }
@@ -87,6 +81,9 @@ class MviActivity : BaseActivity() {
                 }
                 FetchStatus.Error -> {
                     toast("error")
+                }
+                else -> {
+                    toast("wtf")
                 }
             }
             mAdapter.submitList(list)
