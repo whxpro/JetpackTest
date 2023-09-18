@@ -47,7 +47,7 @@ class DownloadWorker(ctx: Context, workParam: WorkerParameters) : CoroutineWorke
             .setContentText(progress)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setOngoing(true)
-            .addAction(R.mipmap.dk_close_icon, cancel, intent)
+            .addAction(R.mipmap.ic_launcher, cancel, intent)
             .build()
 
         val notifId = 233

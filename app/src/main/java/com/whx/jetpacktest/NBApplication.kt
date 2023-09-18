@@ -5,7 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.work.Configuration
-import com.didichuxing.doraemonkit.DoraemonKit
+//import com.didichuxing.doraemonkit.DoraemonKit
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.CoroutineScope
@@ -19,10 +19,12 @@ class NBApplication : Application(), Configuration.Provider {
         super.onCreate()
         mContext = this
 
-        DoraemonKit.install(this)
+//        DoraemonKit.install(this)
         Fresco.initialize(this)
 
         MMKV.initialize(this)
+
+        Log.e("--------", "app ${getProcessName()} oncreate.....")
     }
 
     companion object {
