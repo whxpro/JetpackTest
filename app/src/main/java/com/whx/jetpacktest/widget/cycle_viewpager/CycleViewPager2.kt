@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.viewpager2.widget.ViewPager2
 import com.whx.jetpacktest.R
 import java.lang.ref.WeakReference
-import java.util.*
+import java.util.Objects
 
 class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: AttributeSet?, defArr: Int = 0) :
     FrameLayout(context, attrs, defArr) {
     private val mViewPager2: ViewPager2 = ViewPager2(context)
 
     private var canAutoTurning = false
-    private var autoTurningTime: Long = 0
+    private var autoTurningInterval: Long = 0
     private var isTurning = false
     private var mAutoTurningRunnable: AutoTurningRunnable? = null
 
@@ -41,7 +41,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
                 }
             }
             if (mIndicator != null) {
-                mIndicator!!.onChanged(getPagerRealCount(), getRealCurrentItem())
+                mIndicator!!.onDataChanged(getPagerRealCount(), getCurrentItem())
             }
         }
     }
@@ -49,8 +49,10 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
     init {
         initWithAttrs(attrs)
 
-        mViewPager2.layoutParams = LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT)
+        mViewPager2.layoutParams = LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
         mViewPager2.offscreenPageLimit = 1
 
         val mCycleOnPageChangeCallback = CycleOnPageChangeCallback(this)
@@ -64,7 +66,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
     private fun initWithAttrs(attrs: AttributeSet?) {
         val tpa = context.obtainStyledAttributes(attrs, R.styleable.CycleViewPager2)
         canAutoTurning = tpa.getBoolean(R.styleable.CycleViewPager2_canAutoTurning, false)
-        autoTurningTime = tpa.getInt(R.styleable.CycleViewPager2_turningTime, 0).toLong()
+        autoTurningInterval = tpa.getInt(R.styleable.CycleViewPager2_turningInterval, 0).toLong()
         tpa.recycle()
     }
 
@@ -74,15 +76,15 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
 
     fun setAutoTurning(canAutoTurning: Boolean, autoTurningTime: Long) {
         this.canAutoTurning = canAutoTurning
-        this.autoTurningTime = autoTurningTime
+        this.autoTurningInterval = autoTurningTime
         stopAutoTurning()
         startAutoTurning()
     }
 
     fun startAutoTurning() {
-        if (!canAutoTurning || autoTurningTime <= 0 || isTurning) return
+        if (!canAutoTurning || autoTurningInterval <= 0 || isTurning) return
         isTurning = true
-        postDelayed(mAutoTurningRunnable, autoTurningTime)
+        postDelayed(mAutoTurningRunnable, autoTurningInterval)
     }
 
     fun stopAutoTurning() {
@@ -95,26 +97,25 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
             if (mViewPager2.adapter == adapter) return
             adapter.registerAdapterDataObserver(mAdapterDataObserver)
             mViewPager2.adapter = adapter
-            setCurrentItem(1, false)
+            setCurrentItem(0, false)
             initIndicator()
             return
         }
-        throw IllegalArgumentException("adapter must be an instance of CyclePagerAdapter " +
-                "or CyclePagerFragmentAdapter")
+        throw IllegalArgumentException(
+            "adapter must be an instance of CyclePagerAdapter " +
+                    "or CyclePagerFragmentAdapter"
+        )
     }
 
     fun getAdapter(): RecyclerView.Adapter<*>? {
         return mViewPager2.adapter
     }
 
-    private fun getPagerRealCount(): Int {
-        val adapter = getAdapter()
-        if (adapter is BaseCycleAdapter) {
-            return adapter.getRealItemCount()
-        }
-        return if (adapter is BaseCycleFragmentAdapter) {
-            adapter.getRealItemCount()
-        } else 0
+    fun setIndicator(indicator: Indicator?) {
+        if (mIndicator === indicator) return
+
+        mIndicator = indicator
+        initIndicator()
     }
 
     fun setOrientation(@ViewPager2.Orientation orientation: Int) {
@@ -144,18 +145,22 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
 
     fun setCurrentItem(item: Int, smoothScroll: Boolean) {
 //        Logger.d("setCurrentItem $item")
-        mViewPager2.setCurrentItem(item, smoothScroll)
+
+        val pagerItem = item + 1
+
+        setPagerCurrentItem(pagerItem, smoothScroll)
         if (!smoothScroll && mIndicator != null) {
-            mIndicator!!.onPageSelected(getRealCurrentItem())
+            mIndicator!!.onPageSelected(pagerItem)
         }
     }
 
-    fun getCurrentItem(): Int {
-        return mViewPager2.currentItem
-    }
 
-    fun getRealCurrentItem(): Int {
-        return if (getCurrentItem() >= 1) getCurrentItem() - 1 else getCurrentItem()
+    fun getCurrentItem(): Int {
+        return when (val item = mViewPager2.currentItem) {
+            0 -> getPagerRealCount() - 1
+            getPagerRealCount() + 1 -> 0
+            else -> item - 1
+        }
     }
 
     fun setOffscreenPageLimit(@ViewPager2.OffscreenPageLimit limit: Int) {
@@ -166,18 +171,6 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
         return mViewPager2.offscreenPageLimit
     }
 
-    fun registerOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback) {
-        mViewPager2.registerOnPageChangeCallback(callback)
-    }
-
-    fun unregisterOnPageChangeCallback(callback: ViewPager2.OnPageChangeCallback) {
-        mViewPager2.unregisterOnPageChangeCallback(callback)
-    }
-
-    fun getViewPager2(): ViewPager2 {
-        return mViewPager2
-    }
-
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val action = ev.actionMasked
         if (action == MotionEvent.ACTION_DOWN) {
@@ -185,7 +178,8 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
                 stopAutoTurning()
             }
         } else if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_CANCEL ||
-            action == MotionEvent.ACTION_OUTSIDE) {
+            action == MotionEvent.ACTION_OUTSIDE
+        ) {
             if (canAutoTurning) startAutoTurning()
         }
         return super.dispatchTouchEvent(ev)
@@ -220,33 +214,43 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
         restorePendingState()
     }
 
+    private fun getPagerCurrentItem(): Int {
+        return mViewPager2.currentItem
+    }
+
+    private fun setPagerCurrentItem(item: Int, smoothScroll: Boolean = false) {
+        mViewPager2.setCurrentItem(item, smoothScroll)
+    }
+
     private fun restorePendingState() {
         if (mPendingCurrentItem == NO_POSITION) {
             // No state to restore, or state is already restored
             return
         }
-        val currentItem = 0.coerceAtLeast(mPendingCurrentItem.coerceAtMost(
-            ((getAdapter())?.itemCount ?: 0) - 1))
+        val currentItem = 0.coerceAtLeast(
+            mPendingCurrentItem.coerceAtMost(
+                ((getAdapter())?.itemCount ?: 0) - 1
+            )
+        )
 //        Logger.d("restorePendingState: $currentItem")
         mPendingCurrentItem = NO_POSITION
         setCurrentItem(currentItem, false)
     }
 
-    fun setIndicator(indicator: Indicator?) {
-        if (mIndicator === indicator) return
-        removeIndicatorView()
-        mIndicator = indicator
-        initIndicator()
-    }
-
     private fun initIndicator() {
         if (mIndicator == null || getAdapter() == null) return
-        addView(mIndicator!!.getIndicatorView())
-        mIndicator!!.onChanged(getPagerRealCount(), getRealCurrentItem())
+
+        mIndicator!!.onDataChanged(getPagerRealCount(), getCurrentItem())
     }
 
-    private fun removeIndicatorView() {
-        removeView(mIndicator?.getIndicatorView() ?: return)
+    private fun getPagerRealCount(): Int {
+        val adapter = getAdapter()
+        if (adapter is BaseCycleAdapter) {
+            return adapter.getRealItemCount()
+        }
+        return if (adapter is BaseCycleFragmentAdapter) {
+            adapter.getRealItemCount()
+        } else 0
     }
 
     //1.normal:
@@ -260,7 +264,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
     private class CycleOnPageChangeCallback(cycleViewPager2: CycleViewPager2) : ViewPager2.OnPageChangeCallback() {
         private var isBeginPagerChange: Boolean = false
         private var mTempPosition = INVALID_ITEM_POSITION
-        private val weakReference = WeakReference<CycleViewPager2>(cycleViewPager2)
+        private val weakReference = WeakReference(cycleViewPager2)
 
         override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
 //            Logger.d("onPageScrolled: " + position + " positionOffset: " + positionOffset
@@ -275,14 +279,15 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
                 mTempPosition = position
             }
 
-            weakReference.get()?.mIndicator?.onPageSelected(weakReference.get()?.getRealCurrentItem() ?: return)
+            weakReference.get()?.mIndicator?.onPageSelected(weakReference.get()?.getCurrentItem() ?: return)
         }
 
         override fun onPageScrollStateChanged(state: Int) {
 //            Logger.d("onPageScrollStateChanged: state $state")
             val cp = weakReference.get() ?: return
             if (state == ViewPager2.SCROLL_STATE_DRAGGING || cp.isTurning && state ==
-                ViewPager2.SCROLL_STATE_SETTLING) {
+                ViewPager2.SCROLL_STATE_SETTLING
+            ) {
                 isBeginPagerChange = true
             } else if (state == ViewPager2.SCROLL_STATE_IDLE) {
                 isBeginPagerChange = false
@@ -290,7 +295,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
                 if (fixCurrentItem != INVALID_ITEM_POSITION && fixCurrentItem != mTempPosition) {
                     mTempPosition = INVALID_ITEM_POSITION
 //                    Logger.d("onPageScrollStateChanged: fixCurrentItem $fixCurrentItem")
-                    cp.setCurrentItem(fixCurrentItem, false)
+                    cp.setPagerCurrentItem(fixCurrentItem, false)
                 }
             }
 
@@ -299,8 +304,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
 
         private fun getFixCurrentItem(position: Int): Int {
             if (position == INVALID_ITEM_POSITION) return INVALID_ITEM_POSITION
-            val lastPosition = Objects.requireNonNull<RecyclerView.Adapter<*>>(weakReference
-                .get()?.getAdapter()).itemCount - 1
+            val lastPosition = (weakReference.get()?.getAdapter()?.itemCount ?: return INVALID_ITEM_POSITION) - 1
             var fixPosition = INVALID_ITEM_POSITION
             if (position == 0) {
                 fixPosition = if (lastPosition == 0) 0 else lastPosition - 1
@@ -323,9 +327,9 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
             if (cycleViewPager2 != null && cycleViewPager2.canAutoTurning && cycleViewPager2.isTurning) {
                 val itemCount = cycleViewPager2.getAdapter()?.itemCount ?: 0
                 if (itemCount == 0) return
-                val nextItem = (cycleViewPager2.getCurrentItem() + 1) % itemCount
-                cycleViewPager2.setCurrentItem(nextItem, true)
-                cycleViewPager2.postDelayed(cycleViewPager2.mAutoTurningRunnable, cycleViewPager2.autoTurningTime)
+                val nextItem = (cycleViewPager2.getPagerCurrentItem() + 1) % itemCount
+                cycleViewPager2.setPagerCurrentItem(nextItem, true)
+                cycleViewPager2.postDelayed(cycleViewPager2.mAutoTurningRunnable, cycleViewPager2.autoTurningInterval)
             }
         }
     }
@@ -364,6 +368,7 @@ class CycleViewPager2 @JvmOverloads constructor(context: Context, attrs: Attribu
                 else
                     SavedState(source)
             }
+
             override fun createFromParcel(parcel: Parcel): SavedState {
                 return SavedState(parcel)
             }
